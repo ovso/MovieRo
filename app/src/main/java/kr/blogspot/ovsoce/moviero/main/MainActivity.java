@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         mPresenter = new MainPresenterImpl(this);
-        mPresenter.onCreate();
+        mPresenter.onCreate(getApplicationContext());
     }
     MaterialSearchView searchView;
     @Override
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-            Common.loadJSONFromAsset(getApplicationContext());
+            //Common.loadJSONFromAsset(getApplicationContext());
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
