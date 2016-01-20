@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class ChannelItemImpl implements ChannelItem {
     String name;
+
     public void setName(String name){
         this.name = name;
     }
@@ -15,13 +16,16 @@ public class ChannelItemImpl implements ChannelItem {
         return name;
     }
 
+    List<ProgramItem> list;
     @Override
     public String getImageMulti() {
         return null;
     }
-
     @Override
     public List<ProgramItem> getProgramList() {
         return null;
+    }
+    public void setProgramList(List<ProgramItem> list) {
+        this.list = list;
     }
 }
