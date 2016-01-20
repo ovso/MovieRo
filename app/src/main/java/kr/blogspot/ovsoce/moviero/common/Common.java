@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 public class Common {
 
-    public static void loadJSONFromAsset(Context context) {
+    public static String loadJSONFromAsset(Context context) {
         String json = null;
         try {
             InputStream is = context.getAssets().open("moviero01.json");
@@ -40,7 +40,7 @@ public class Common {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        return json;
 /*        try {
             JSONObject obj = new JSONObject(json);
             JSONArray m_jArry = obj.getJSONArray("formules");
