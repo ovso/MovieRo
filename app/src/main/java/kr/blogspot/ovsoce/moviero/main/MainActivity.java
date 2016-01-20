@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import kr.blogspot.ovsoce.moviero.R;
+import kr.blogspot.ovsoce.moviero.common.Common;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Common.loadJSONFromAsset(getApplicationContext());
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

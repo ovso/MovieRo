@@ -20,7 +20,7 @@ public class Common {
     public static void loadJSONFromAsset(Context context) {
         String json = null;
         try {
-            InputStream is = context.getAssets().open("moviero.json");
+            InputStream is = context.getAssets().open("moviero01.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -31,6 +31,15 @@ public class Common {
             ex.printStackTrace();
         }
 
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            Log.d("OJH", "jsonArray.length = " + jsonArray.length());
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            JSONArray array = jsonObject.getJSONArray("programList");
+            Log.d("OJH", "array.length = " + array.length());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 /*        try {
             JSONObject obj = new JSONObject(json);
