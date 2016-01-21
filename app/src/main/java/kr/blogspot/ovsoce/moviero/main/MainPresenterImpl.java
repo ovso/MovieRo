@@ -4,8 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import kr.blogspot.ovsoce.moviero.common.Common;
-import kr.blogspot.ovsoce.moviero.main.vo.ChannelItem;
+import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ProgramItem;
 
 /**
  * Created by ovso on 2016. 1. 20..
@@ -21,7 +20,7 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onCreate(Context context) {
         mView.onInit();
-        List<ChannelItem> list = mModel.getChannelList(context);
+        List<ProgramItem> list = mModel.getProgramList(context);
         mView.initRecyclerView(list);
     }
 }

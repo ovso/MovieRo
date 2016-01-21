@@ -17,26 +17,23 @@ import java.util.HashMap;
  */
 public class Common {
 
-    public static String loadJSONFromAsset(Context context) {
+    public static String loadJSONFromAsset(Context context, String fileName) {
         String json = null;
         try {
-            InputStream is = context.getAssets().open("moviero01.json");
+            InputStream is = context.getAssets().open(fileName);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
-            Log.d("TAG", json);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
         try {
             JSONArray jsonArray = new JSONArray(json);
-            Log.d("OJH", "jsonArray.length = " + jsonArray.length());
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             JSONArray array = jsonObject.getJSONArray("programList");
-            Log.d("OJH", "array.length = " + array.length());
         } catch (JSONException e) {
             e.printStackTrace();
         }

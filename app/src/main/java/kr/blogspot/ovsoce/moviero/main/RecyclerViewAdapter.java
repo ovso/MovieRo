@@ -11,17 +11,18 @@ import android.widget.TextView;
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
-import kr.blogspot.ovsoce.moviero.main.vo.ChannelItem;
+import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ChannelItem;
+import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ProgramItem;
 
 /**
  * Created by ovso on 2016. 1. 21..
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
-    List<ChannelItem> mList;
+    List<ProgramItem> mList;
     RecyclerView mRecyclerView;
     OnAdapterItemClickListener mListener;
-    public RecyclerViewAdapter(List<ChannelItem> list) {
+    public RecyclerViewAdapter(List<ProgramItem> list) {
         mList = list;
     }
 
@@ -33,10 +34,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ChannelItem data = mList.get(position);
+        ProgramItem data = mList.get(position);
+        String name = data.getName();
         MyViewHolder myViewHolder = (MyViewHolder)holder;
-        myViewHolder.titleTv.setText(data.getName());
-        Log.d("Name", data.getName());
+        myViewHolder.titleTv.setText(name);
         //myViewHolder.blockV.setBackgroundColor(Color.parseColor(data.getColor()));
 
     }

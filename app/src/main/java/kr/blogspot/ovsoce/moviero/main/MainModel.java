@@ -1,7 +1,6 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.content.Context;
-import android.os.Handler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,10 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.common.Common;
-import kr.blogspot.ovsoce.moviero.main.vo.ChannelItem;
-import kr.blogspot.ovsoce.moviero.main.vo.ChannelItemImpl;
-import kr.blogspot.ovsoce.moviero.main.vo.ProgramItem;
 import kr.blogspot.ovsoce.moviero.main.vo.ProgramItemImpl;
+import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ProgramItem;
 
 /**
  * Created by ovso on 2016. 1. 20..
@@ -40,33 +37,39 @@ public class MainModel {
                 "subtitle": "2부",
                 "signLanguage": false
      */
-    public List<ChannelItem> getChannelList(Context context) {
+    public List<ProgramItem> getProgramList(Context context) {
 
-        String json = Common.loadJSONFromAsset(context);
-        List<ChannelItem> list = new ArrayList<>();
-        try {
+        String json = Common.loadJSONFromAsset(context, "moviero01.json");
+        String[] channelJsons = {
+                Common.loadJSONFromAsset(context, "moviero01.json"),
+                Common.loadJSONFromAsset(context, "moviero02.json"),
+                Common.loadJSONFromAsset(context, "moviero03.json"),
+                Common.loadJSONFromAsset(context, "moviero04.json"),
+                Common.loadJSONFromAsset(context, "moviero05.json"),
+                Common.loadJSONFromAsset(context, "moviero06.json"),
+        };
+        //List<ChannelItem> list = new ArrayList<>();
+        List<ProgramItem> programList = new ArrayList<>();
+        for(int i=0; i<channelJsons.length; i++) {
+            try {
+                JSONArray jsonArray = new JSONArray(channelJsons[i]); // 채널 12개..
 
-            JSONArray jsonArray = new JSONArray(json);
-            for(int i=0; i<jsonArray.length(); i++) {
-                ChannelItemImpl item = new ChannelItemImpl();
+                for(int j=0; j<jsonArray.length(); j++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(j);
+                    JSONArray programListJsonArray = jsonObject.getJSONArray("programList");
 
-                JSONObject object = jsonArray.getJSONObject(i);
-                item.setName(object.getString("channelName"));
-                JSONArray programListJsonArray = object.getJSONArray("programList");
-
-                List<ProgramItem> programItemList = new ArrayList<>();
-                for(int j=0; j<programListJsonArray.length(); j++) {
-                    ProgramItemImpl programItem = new ProgramItemImpl();
-                    object = programListJsonArray.getJSONObject(j);
-                    programItem.setName(object.getString("scheduleName"));
-                    programItemList.add(programItem);
+                    for(int k=0; k<programListJsonArray.length(); k++) {
+                        JSONObject programJsonObject = programListJsonArray.getJSONObject(k);
+                        ProgramItemImpl item = new ProgramItemImpl();
+                        item.setScheduleName(programJsonObject.getString("scheduleName"));
+                        programList.add(item);
+                    }
                 }
-                item.setProgramList(programItemList);
-                list.add(item);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return list;
+        return programList;
+        //return list;
     }
 }

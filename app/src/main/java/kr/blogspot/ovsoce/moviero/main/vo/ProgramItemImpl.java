@@ -1,16 +1,18 @@
 package kr.blogspot.ovsoce.moviero.main.vo;
 
+import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ProgramItem;
+
 /**
  * Created by ovso on 2016. 1. 21..
  */
 public class ProgramItemImpl implements ProgramItem {
-    String name;
-    public void setName(String name) {
-        this.name = name;
+    String scheduleName;
+    public void setScheduleName(String scheduleName) {
+        this.scheduleName = scheduleName;
     }
     @Override
     public String getName() {
-        return null;
+        return scheduleName;
     }
 
     @Override

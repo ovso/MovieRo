@@ -1,5 +1,7 @@
 package kr.blogspot.ovsoce.moviero.main.vo;
 
+import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.MovieItem;
+
 /**
  * Created by ovso on 2016. 1. 21..
  */

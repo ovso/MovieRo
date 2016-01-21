@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.moviero.main.vo;
+package kr.blogspot.ovsoce.moviero.main.vo.VOInterface;
 
 import java.util.List;
 

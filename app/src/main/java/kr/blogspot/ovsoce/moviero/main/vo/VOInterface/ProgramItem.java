@@ -1,9 +1,9 @@
-package kr.blogspot.ovsoce.moviero.main.vo;
+package kr.blogspot.ovsoce.moviero.main.vo.VOInterface;
 
 /**
  * Created by ovso on 2016. 1. 21..
  */
-public interface MovieItem {
+public interface ProgramItem {
     String getName();
     String getBeginDate();
     String getBeginTime();

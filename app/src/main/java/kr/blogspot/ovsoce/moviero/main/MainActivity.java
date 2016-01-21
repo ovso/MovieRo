@@ -9,16 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
-import kr.blogspot.ovsoce.moviero.common.Common;
-import kr.blogspot.ovsoce.moviero.main.vo.ChannelItem;
+import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ChannelItem;
+import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ProgramItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
@@ -99,7 +102,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void initRecyclerView(List<ChannelItem> list) {
+    public void initRecyclerView(List<ProgramItem> list) {
+        Log.d("OJH","list.size = " + list.size());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
