@@ -27,7 +27,9 @@ import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
  */
 public class MainModel {
 
-    public void getMovieItem(MovieData movieData) {
+    public List<ProgramData> getProgramList(MovieData movieData) {
+        List<ProgramData> programDataList = new ArrayList<>();
+
         int size = movieData.getMovieDataByDateList().size();
         Log.d("date length = " + size + "일");
 
@@ -43,6 +45,9 @@ public class MainModel {
                     for (int k = 0; k < movieData.getMovieDataByDateList().get(i).getChannelDataList().get(j).getProgramDataList().size(); k++) {
                         ProgramData d = movieData.getMovieDataByDateList().get(i).getChannelDataList().get(j).getProgramDataList().get(k);
                         if (d.getLargeGenreId().equalsIgnoreCase("B")) {
+
+                            programDataList.add(d);
+
                             movieCount++;
                         }
                         count++;
@@ -53,6 +58,8 @@ public class MainModel {
 
         Log.d("Total program count = " + count);
         Log.d("movie count = " + movieCount);
+
+        return programDataList;
     }
 
     public List<ProgramItem> getProgramList(Context context) {
@@ -152,6 +159,7 @@ public class MainModel {
                         programData.setAgeRating(programJsonObject.getString("ageRating"));
                         programData.setSubtitle(programJsonObject.getString("subtitle"));
                         programData.setSignLanguage(programJsonObject.getString("signLanguage"));
+                        programData.setChannelName(jsonObject.getString("channelName"));
 
                         programDataList.add(programData);
                     }

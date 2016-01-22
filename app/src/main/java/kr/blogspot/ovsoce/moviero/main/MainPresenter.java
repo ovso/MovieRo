@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
+import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
 
 /**
@@ -13,6 +14,7 @@ public interface MainPresenter {
     void onCreate(Context context);
     interface View {
         void onInit();
-        void initRecyclerView(List<ProgramItem> list);
+        void initRecyclerView(List<ProgramData> list);
+        void setSuggestion(String[] names);
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
+import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
 
 /**
@@ -17,10 +18,10 @@ import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
-    List<ProgramItem> mList;
+    List<ProgramData> mList;
     RecyclerView mRecyclerView;
     OnAdapterItemClickListener mListener;
-    public RecyclerViewAdapter(List<ProgramItem> list) {
+    public RecyclerViewAdapter(List<ProgramData> list) {
         mList = list;
     }
 
@@ -32,8 +33,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ProgramItem data = mList.get(position);
-        String name = data.getName();
+        ProgramData data = mList.get(position);
+        String name = data.getScheduleName();
         MyViewHolder myViewHolder = (MyViewHolder)holder;
         myViewHolder.titleTv.setText(name);
         //myViewHolder.blockV.setBackgroundColor(Color.parseColor(data.getColor()));
