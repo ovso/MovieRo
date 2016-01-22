@@ -11,35 +11,13 @@ import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.common.Common;
 import kr.blogspot.ovsoce.moviero.main.vo.ProgramItemImpl;
-import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ProgramItem;
+import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
 
 /**
  * Created by ovso on 2016. 1. 20..
  */
 public class MainModel {
-    /*
-                "scheduleId": "P735202419",
-                "programMasterId": "M614030916",
-                "scheduleName": "모데카이",
-                "beginDate": "2016-01-18",
-                "beginTime": "23:00",
-                "endTime": "00:10",
-                "runtime": 70,
-                "largeGenreId": "B",
-                "episodeNo": "",
-                "live": false,
-                "rebroadcast": false,
-                "hd": true,
-                "audio": "",
-                "screenExplain": false,
-                "caption": true,
-                "ageRating": 15,
-                "subtitle": "2부",
-                "signLanguage": false
-     */
     public List<ProgramItem> getProgramList(Context context) {
-
-        String json = Common.loadJSONFromAsset(context, "moviero01.json");
         String[] channelJsons = {
                 Common.loadJSONFromAsset(context, "moviero01.json"),
                 Common.loadJSONFromAsset(context, "moviero02.json"),

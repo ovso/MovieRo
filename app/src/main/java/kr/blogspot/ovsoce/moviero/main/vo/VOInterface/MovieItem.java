@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.moviero.main.vo.VOInterface;
+package kr.blogspot.ovsoce.moviero.main.vo.vointerface;
 
 /**
  * Created by ovso on 2016. 1. 21..

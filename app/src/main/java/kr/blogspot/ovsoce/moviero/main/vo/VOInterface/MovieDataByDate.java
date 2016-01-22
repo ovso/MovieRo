@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.moviero.main.vo.VOInterface;
+package kr.blogspot.ovsoce.moviero.main.vo.vointerface;
 
 import java.util.List;
 
@@ -6,14 +6,9 @@ import java.util.List;
  * Created by jaeho_oh on 2016-01-21.
  */
 public interface MovieDataByDate {
-    String getBroadcastType();
-    String broadcastName();
-    String getMyChannel();
-    String getAdult();
-    String getChannelId();
-    String getChannelName();
-    String getImageMulti();
-    String getChannelBeginDate();
-    String getChannelBeginTime();
-    List<ProgramData> getProgramDataList();
+    /**
+     * 하루의 영화 데이터를 가져온다.
+     * @return
+     */
+    List<ChannelData> getChannelDataList();
 }

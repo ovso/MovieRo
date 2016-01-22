@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.moviero.main.vo.VOInterface;
+package kr.blogspot.ovsoce.moviero.main.vo.vointerface;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import java.util.List;
  */
 public interface MovieData {
     /**
-     * 날짜별 영화 데이터를 가져옴
+     * 날짜별 영화 데이터를 가져옴(6~7일간 데이터)
      * @return
      */
     List<MovieDataByDate> getMovieDataByDateList();

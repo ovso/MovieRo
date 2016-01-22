@@ -12,16 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
-import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ChannelItem;
-import kr.blogspot.ovsoce.moviero.main.vo.VOInterface.ProgramItem;
+import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
