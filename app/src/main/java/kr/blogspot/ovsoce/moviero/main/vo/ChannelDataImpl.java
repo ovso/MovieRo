@@ -9,20 +9,22 @@ import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
  * Created by jaeho_oh on 2016-01-22.
  */
 public class ChannelDataImpl implements ChannelData {
-    String broadcastType;
-    String broadcastName;
-    String isMyChannel;
-    String adult;
-    String channelId;
-    String channelName;
-    String imageMulti;
-    String channelBeginDate;
-    String channelBeginTime;
-    List<ProgramData> programDataList;
+    private String broadcastType;
+    private String broadcastName;
+    private String isMyChannel;
+    private String adult;
+    private String channelId;
+    private String channelName;
+    private String imageMulti;
+    private String channelBeginDate;
+    private String channelBeginTime;
+    private List<ProgramData> programDataList;
+
     @Override
     public String getBroadcastType() {
         return broadcastType;
     }
+
     public void setBroadcastType(String broadcastType) {
         this.broadcastType = broadcastType;
     }
@@ -31,15 +33,16 @@ public class ChannelDataImpl implements ChannelData {
     public String getBroadcastName() {
         return broadcastName;
     }
-    public void getBroadcastName(String broadcastName) {
+
+    public void setBroadcastName(String broadcastName) {
         this.broadcastName = broadcastName;
     }
 
-    @Override
     public String isMyChannel() {
         return isMyChannel;
     }
-    public void setMyChannel(String isMyChannel) {
+
+    public void setIsMyChannel(String isMyChannel) {
         this.isMyChannel = isMyChannel;
     }
 
@@ -47,6 +50,7 @@ public class ChannelDataImpl implements ChannelData {
     public String getAdult() {
         return adult;
     }
+
     public void setAdult(String adult) {
         this.adult = adult;
     }
@@ -55,6 +59,7 @@ public class ChannelDataImpl implements ChannelData {
     public String getChannelId() {
         return channelId;
     }
+
     public void setChannelId(String channelId) {
         this.channelId = channelId;
     }
@@ -63,6 +68,7 @@ public class ChannelDataImpl implements ChannelData {
     public String getChannelName() {
         return channelName;
     }
+
     public void setChannelName(String channelName) {
         this.channelName = channelName;
     }
@@ -71,6 +77,7 @@ public class ChannelDataImpl implements ChannelData {
     public String getImageMulti() {
         return imageMulti;
     }
+
     public void setImageMulti(String imageMulti) {
         this.imageMulti = imageMulti;
     }
@@ -79,14 +86,16 @@ public class ChannelDataImpl implements ChannelData {
     public String getChannelBeginDate() {
         return channelBeginDate;
     }
+
     public void setChannelBeginDate(String channelBeginDate) {
-        this.channelBeginDate =  channelBeginDate;
+        this.channelBeginDate = channelBeginDate;
     }
 
     @Override
     public String getChannelBeginTime() {
         return channelBeginTime;
     }
+
     public void setChannelBeginTime(String channelBeginTime) {
         this.channelBeginTime = channelBeginTime;
     }
@@ -95,6 +104,7 @@ public class ChannelDataImpl implements ChannelData {
     public List<ProgramData> getProgramDataList() {
         return programDataList;
     }
+
     public void setProgramDataList(List<ProgramData> programDataList) {
         this.programDataList = programDataList;
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
+import kr.blogspot.ovsoce.moviero.main.vo.vointerface.MovieData;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
 
 /**
@@ -21,6 +22,8 @@ public class MainPresenterImpl implements MainPresenter {
     public void onCreate(Context context) {
         mView.onInit();
         List<ProgramItem> list = mModel.getProgramList(context);
+        MovieData movieData = mModel.getMovieData(context);
+        mModel.getMovieItem(movieData);
         mView.initRecyclerView(list);
     }
 }
