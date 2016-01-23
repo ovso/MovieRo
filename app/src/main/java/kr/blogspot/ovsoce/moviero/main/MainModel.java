@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.content.Context;
+import android.widget.Filterable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +27,14 @@ import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
  * Created by ovso on 2016. 1. 20..
  */
 public class MainModel {
-
+    private List<ProgramData> searchList;
+    public ProgramData getProgramData(int position) {
+        return searchList.get(position);
+    }
+    public void onQueryTextChange(String newText, Filterable filterable) {
+        filterable.getFilter().filter(newText);
+        searchList = ((RecyclerViewAdapter)filterable).getSearchList();
+    }
     public List<ProgramData> getProgramList(MovieData movieData) {
         List<ProgramData> programDataList = new ArrayList<>();
 

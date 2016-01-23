@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.content.Context;
+import android.widget.Filterable;
 
 import java.util.List;
 
@@ -33,5 +34,10 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onQueryTextChange(String newText) {
         mView.startFilter(newText);
+    }
+
+    @Override
+    public void onInterceptTouchEvent(int position) {
+        mView.showSetDialog(position);
     }
 }

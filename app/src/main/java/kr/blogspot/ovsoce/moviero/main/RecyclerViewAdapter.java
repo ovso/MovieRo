@@ -16,20 +16,16 @@ import java.util.List;
 import kr.blogspot.ovsoce.moviero.R;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
-/**
- * Created by ovso on 2016. 1. 21..
- */
 public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filterable {
-
+    public List<ProgramData> getSearchList() {
+        return mSearchList;
+    }
     List<ProgramData> mList;
     List<ProgramData> mSearchList;
-    RecyclerView mRecyclerView;
-    OnAdapterItemClickListener mListener;
     public RecyclerViewAdapter(List<ProgramData> list) {
         mList = list;
         mSearchList = (List<ProgramData>) ((ArrayList<ProgramData>)list).clone();
     }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, null);
@@ -54,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
     @Override
     public Filter getFilter() {
 
-        Filter filter = new Filter() {
+        return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
@@ -88,7 +84,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
             }
         };
 
-        return filter;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
@@ -101,12 +96,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
             thumbnailIv = (ImageView) itemView.findViewById(R.id.iv_thumbnail);
             titleTv = (TextView) itemView.findViewById(R.id.tv_title);
             descriptionTv = (TextView) itemView.findViewById(R.id.tv_description);
-            //itemView.setOnClickListener(mListener);
             //itemView.setOnLongClickListener(mListener);
         }
     }
 
-    public interface OnAdapterItemClickListener extends android.view.View.OnClickListener, android.view.View.OnLongClickListener {
+/*
+    public interface OnRecyclerViewAdapterClickListener extends android.view.View.OnClickListener, android.view.View.OnLongClickListener {
 
     }
+*/
 }
