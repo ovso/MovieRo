@@ -7,9 +7,6 @@ import java.util.List;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.MovieData;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
-/**
- * Created by ovso on 2016. 1. 20..
- */
 public class MainPresenterImpl implements MainPresenter {
     MainPresenter.View mView;
     MainModel mModel;
@@ -31,5 +28,10 @@ public class MainPresenterImpl implements MainPresenter {
             names[i] = list.get(i).getScheduleName();
         }
         mView.setSuggestion(names);
+    }
+
+    @Override
+    public void onQueryTextChange(String newText) {
+        mView.startFilter(newText);
     }
 }

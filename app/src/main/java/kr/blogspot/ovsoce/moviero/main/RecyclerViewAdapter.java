@@ -1,6 +1,5 @@
 package kr.blogspot.ovsoce.moviero.main;
 
-import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,9 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
-import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
-import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
 
 /**
  * Created by ovso on 2016. 1. 21..
@@ -41,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ProgramData data = mList.get(position);
+        ProgramData data = mSearchList.get(position);
         String name = data.getScheduleName();
         MyViewHolder myViewHolder = (MyViewHolder)holder;
         myViewHolder.titleTv.setText(name);
@@ -71,19 +68,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
 
                     filterResults.values = tempArrayList;
                     filterResults.count = tempArrayList.size();
+                } else {
+                    mSearchList = (List<ProgramData>) ((ArrayList<ProgramData>)mList).clone();
                 }
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                Log.d("result.values=" + results.values);
-                Log.d("result.count=" + results.count);
+                //Log.d("result.values=" + results.values);
+                //Log.d("result.count=" + results.count);
                 if (results.values != null) {
-                    mSearchList = (ArrayList<ProgramData>) results.values;
+                    mSearchList = (List<ProgramData>) results.values;
+                    notifyDataSetChanged();
+                } else {
+                    mSearchList = (List<ProgramData>) ((ArrayList<ProgramData>)mList).clone();
                     notifyDataSetChanged();
                 }
-
             }
         };
 

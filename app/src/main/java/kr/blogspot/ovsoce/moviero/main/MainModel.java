@@ -31,7 +31,7 @@ public class MainModel {
         List<ProgramData> programDataList = new ArrayList<>();
 
         int size = movieData.getMovieDataByDateList().size();
-        Log.d("date length = " + size + "일");
+        //Log.d("date length = " + size + "일");
 
         int count = 0;
         int movieCount = 0;
@@ -54,7 +54,7 @@ public class MainModel {
             }
         }
 
-        Log.d("Total program count = " + count);
+        //Log.d("Total program count = " + count);
         Log.d("movie count = " + movieCount);
 
         return programDataList;

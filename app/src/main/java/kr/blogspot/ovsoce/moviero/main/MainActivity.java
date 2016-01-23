@@ -11,10 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Filter;
-import android.widget.Filterable;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -102,36 +99,37 @@ public class MainActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_camera);
 
 
-        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d("query = " + query);
-                return false;
-            }
+        mSearchView.setOnQueryTextListener(mOnQueryTextListener);
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //Do some magic
-                Log.d("newText = " + newText);
-                startFilter(newText);
-                return false;
-            }
-        });
-
-        mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-            @Override
-            public void onSearchViewShown() {
-                Log.d("onSearchViewShown");
-                //Do some magic
-            }
-
-            @Override
-            public void onSearchViewClosed() {
-                Log.d("onSearchViewClosed");
-                //Do some magic
-            }
-        });
+        mSearchView.setOnSearchViewListener(mSearchViewListener);
     }
+    private MaterialSearchView.SearchViewListener mSearchViewListener = new MaterialSearchView.SearchViewListener() {
+        @Override
+        public void onSearchViewShown() {
+            Log.d("");
+        }
+
+        @Override
+        public void onSearchViewClosed() {
+            Log.d("");
+        }
+    };
+    private MaterialSearchView.OnQueryTextListener mOnQueryTextListener = new MaterialSearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            //Log.d("query = " + query);
+            mSearchView.hideKeyboard(mSearchView);
+            return true;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            //Do some magic
+            //Log.d("newText = " + newText);
+            mPresenter.onQueryTextChange(newText);
+            return false;
+        }
+    };
 
     @Override
     public void initRecyclerView(List<ProgramData> list) {
@@ -149,14 +147,17 @@ public class MainActivity extends AppCompatActivity
     public void setSuggestion(String[] names) {
         //mSearchView.setSuggestions(names);
     }
-    private void startFilter(CharSequence s) {
-        if (mRecyclerViewAdapter != null && mRecyclerViewAdapter instanceof Filterable) {
-            ((Filterable) mRecyclerViewAdapter).getFilter().filter(s, MainActivity.this);
+
+    @Override
+    public void startFilter(CharSequence s) {
+        if (mRecyclerViewAdapter != null) {
+            mRecyclerViewAdapter.getFilter().filter(s, MainActivity.this);
         }
     }
 
+
     @Override
     public void onFilterComplete(int count) {
-        Log.d("count = "+count);
+        //Log.d("count="+count);
     }
 }
