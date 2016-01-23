@@ -33,14 +33,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="영화 제목" />
+                android:text="영화 제목"
+                android:gravity="center"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="영화 시간" />
+                android:text="" />
         </LinearLayout>
     </LinearLayout>
 

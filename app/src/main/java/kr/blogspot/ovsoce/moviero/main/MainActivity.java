@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         mPresenter = new MainPresenterImpl(this);
         mPresenter.onCreate(getApplicationContext());
     }
-    MaterialSearchView searchView;
+    MaterialSearchView mSearchView;
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
 
         MenuItem item = menu.findItem(R.id.action_search);
-        searchView.setMenuItem(item);
+        mSearchView.setMenuItem(item);
 
         return true;
     }
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onInit() {
 
-        searchView = (MaterialSearchView) findViewById(R.id.search_view);
+        mSearchView = (MaterialSearchView) findViewById(R.id.search_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_camera);
 
 
-        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("query = " + query);
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+        mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
                 Log.d("onSearchViewShown");
@@ -124,6 +126,12 @@ public class MainActivity extends AppCompatActivity
             public void onSearchViewClosed() {
                 Log.d("onSearchViewClosed");
                 //Do some magic
+            }
+        });
+        mSearchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("position="+position);
             }
         });
     }
@@ -142,6 +150,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setSuggestion(String[] names) {
-        //searchView.setSuggestions(names);
+        mSearchView.setSuggestions(names);
     }
 }

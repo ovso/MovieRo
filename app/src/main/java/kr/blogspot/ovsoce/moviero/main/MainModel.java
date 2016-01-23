@@ -39,8 +39,6 @@ public class MainModel {
         for (int i = 0; i < size; i++) {
 
             for (int j = 0; j < movieData.getMovieDataByDateList().get(i).getChannelDataList().size(); j++) {
-                //if (movieData.getMovieDataByDateList().get(i).getChannelDataList().get(j).getAdult().equalsIgnoreCase("N")) {
-
 
                     for (int k = 0; k < movieData.getMovieDataByDateList().get(i).getChannelDataList().get(j).getProgramDataList().size(); k++) {
                         ProgramData d = movieData.getMovieDataByDateList().get(i).getChannelDataList().get(j).getProgramDataList().get(k);
