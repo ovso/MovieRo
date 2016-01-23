@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -23,7 +25,7 @@ import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
+        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View, Filter.FilterListener{
 
     MainPresenter mPresenter;
     @Override
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity
             public boolean onQueryTextChange(String newText) {
                 //Do some magic
                 Log.d("newText = " + newText);
+                startFilter(newText);
                 return false;
             }
         });
@@ -128,12 +131,6 @@ public class MainActivity extends AppCompatActivity
                 //Do some magic
             }
         });
-        mSearchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("position="+position);
-            }
-        });
     }
 
     @Override
@@ -144,12 +141,22 @@ public class MainActivity extends AppCompatActivity
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
-        recyclerView.setAdapter(adapter);
+        mRecyclerViewAdapter = new RecyclerViewAdapter(list);
+        recyclerView.setAdapter(mRecyclerViewAdapter);
+    }
+    RecyclerViewAdapter mRecyclerViewAdapter;
+    @Override
+    public void setSuggestion(String[] names) {
+        //mSearchView.setSuggestions(names);
+    }
+    private void startFilter(CharSequence s) {
+        if (mRecyclerViewAdapter != null && mRecyclerViewAdapter instanceof Filterable) {
+            ((Filterable) mRecyclerViewAdapter).getFilter().filter(s, MainActivity.this);
+        }
     }
 
     @Override
-    public void setSuggestion(String[] names) {
-        mSearchView.setSuggestions(names);
+    public void onFilterComplete(int count) {
+        Log.d("count = "+count);
     }
 }
