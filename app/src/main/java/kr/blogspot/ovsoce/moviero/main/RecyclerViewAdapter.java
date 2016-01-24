@@ -10,8 +10,11 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import kr.blogspot.ovsoce.moviero.R;
 import kr.blogspot.ovsoce.moviero.common.Log;
@@ -43,11 +46,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         String name = data.getScheduleName();
         MyViewHolder myViewHolder = (MyViewHolder)holder;
         myViewHolder.titleTv.setText(name);
-        String desc = data.getBeginTime()+"~"+data.getEndTime()+" | "+data.getRuntime()+"분 | "+data.getAgeRating()+"";
-        myViewHolder.descriptionTv.setText(desc);
-        //myViewHolder.blockV.setBackgroundColor(Color.parseColor(data.getColor()));
+        myViewHolder.descriptionTv.setText(getDescription(data));
     }
+    private String getDescription(ProgramData data) {
+        StringBuilder descSb = new StringBuilder();
+        descSb.append("오늘");
+        descSb.append(" | ");
+        descSb.append(data.getChannelName());
+        descSb.append(" | ");
+        descSb.append(data.getBeginTime()+"~"+data.getEndTime());
+        descSb.append(" | ");
+        descSb.append(data.getRuntime()+"분");
+        descSb.append(" | ");
+        descSb.append(data.getAgeRating().equals("0")?"전체":data.getAgeRating()+"세");
 
+        return descSb.toString();
+    };
+/*
+    private String stringDate(String date) {
+        String movieDate =
+        String format = new String("yy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.KOREA);
+        String  = sdf.format(new Date());
+        return d;
+    }
+*/
     @Override
     public int getItemCount() {
         return mSearchList.size();
