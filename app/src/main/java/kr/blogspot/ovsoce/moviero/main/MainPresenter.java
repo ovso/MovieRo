@@ -14,12 +14,12 @@ import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
 public interface MainPresenter {
     void onCreate(Context context);
     void onQueryTextChange(String newText);
-    void onInterceptTouchEvent(int position);
+    void onClickItem(Context context, ProgramData programData);
     interface View {
         void onInit();
         void initRecyclerView(List<ProgramData> list);
         void setSuggestion(String[] names);
         void startFilter(CharSequence newText);
-        void showSetDialog(int position);
+        void showSetDialog(ProgramData programData, String[] choiceItems, int checkedItem);
     }
 }

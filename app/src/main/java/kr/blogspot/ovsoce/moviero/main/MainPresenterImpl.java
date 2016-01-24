@@ -37,7 +37,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onInterceptTouchEvent(int position) {
-        mView.showSetDialog(position);
+    public void onClickItem(Context context, ProgramData programData) {
+        mView.showSetDialog(programData, mModel.getChoiceItems(context), -1);
     }
 }

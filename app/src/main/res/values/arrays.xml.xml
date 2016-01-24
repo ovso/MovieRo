@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="single_choice_items">
+        <item>01분 전</item>
+        <item>05분 전</item>
+        <item>10분 전</item>
+        <item>30분 전</item>
+    </string-array>
+</resources>

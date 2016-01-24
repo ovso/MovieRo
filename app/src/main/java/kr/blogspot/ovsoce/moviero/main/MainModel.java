@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.blogspot.ovsoce.moviero.R;
 import kr.blogspot.ovsoce.moviero.common.Common;
 import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.ChannelDataImpl;
@@ -101,7 +102,9 @@ public class MainModel {
         return programList;
         //return list;
     }
-
+    public String[] getChoiceItems(Context context) {
+        return context.getResources().getStringArray(R.array.single_choice_items);
+    }
     public MovieData getMovieData(Context context) {
         String[] jsonMovieData = {
                 Common.loadJSONFromAsset(context, "moviero01.json"),

@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
+import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filterable {
+public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filterable{
     public List<ProgramData> getSearchList() {
         return mSearchList;
     }
@@ -25,6 +26,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
     public RecyclerViewAdapter(List<ProgramData> list) {
         mList = list;
         mSearchList = (List<ProgramData>) ((ArrayList<ProgramData>)list).clone();
+    }
+    private OnRecyclerViewItemClickListener mOnItemClickListener;
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        mOnItemClickListener = listener;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,8 +43,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         String name = data.getScheduleName();
         MyViewHolder myViewHolder = (MyViewHolder)holder;
         myViewHolder.titleTv.setText(name);
+        String desc = data.getBeginTime()+"~"+data.getEndTime()+" | "+data.getRuntime()+"분 | "+data.getAgeRating()+"";
+        myViewHolder.descriptionTv.setText(desc);
         //myViewHolder.blockV.setBackgroundColor(Color.parseColor(data.getColor()));
-
     }
 
     @Override
@@ -86,6 +92,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
 
     }
 
+    private OnRecyclerViewAdapterClickListener onRecyclerViewAdapterClickListener(final View itemView) {
+        return new OnRecyclerViewAdapterClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemClickListener.onClickItem(itemView);
+            }
+        };
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView titleTv;
         TextView descriptionTv;
@@ -96,13 +111,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
             thumbnailIv = (ImageView) itemView.findViewById(R.id.iv_thumbnail);
             titleTv = (TextView) itemView.findViewById(R.id.tv_title);
             descriptionTv = (TextView) itemView.findViewById(R.id.tv_description);
-            //itemView.setOnLongClickListener(mListener);
+            itemView.findViewById(R.id.recyclerview_assist_item).setOnClickListener(onRecyclerViewAdapterClickListener(itemView));
         }
     }
 
-/*
-    public interface OnRecyclerViewAdapterClickListener extends android.view.View.OnClickListener, android.view.View.OnLongClickListener {
+    public interface OnRecyclerViewAdapterClickListener extends android.view.View.OnClickListener{//, android.view.View.OnLongClickListener
 
     }
-*/
+    public interface OnRecyclerViewItemClickListener{
+        void onClickItem(View view);
+        //void onLongClickItem(int position);
+    }
 }

@@ -2,6 +2,8 @@ package kr.blogspot.ovsoce.moviero.main;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,10 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Filter;
+import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity
         mPresenter.onCreate(getApplicationContext());
     }
     MaterialSearchView mSearchView;
+    RecyclerView mRecyclerView;
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -138,28 +143,18 @@ public class MainActivity extends AppCompatActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(layoutManager);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerViewAdapter = new RecyclerViewAdapter(list);
-        recyclerView.setAdapter(mRecyclerViewAdapter);
-        recyclerView.addOnItemTouchListener(mSimpleOnItemTouchListener);
-
+        mRecyclerViewAdapter.setOnItemClickListener(onRecyclerViewItemClickListener);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
     }
-    private RecyclerView.SimpleOnItemTouchListener mSimpleOnItemTouchListener = new RecyclerView.SimpleOnItemTouchListener() {
-        private boolean isMoveEvent = false;
+    private RecyclerViewAdapter.OnRecyclerViewItemClickListener onRecyclerViewItemClickListener = new RecyclerViewAdapter.OnRecyclerViewItemClickListener() {
         @Override
-        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            if(e.getAction() == MotionEvent.ACTION_UP) {
-                if(!isMoveEvent) {
-                    int position = rv.getChildAdapterPosition(rv.findChildViewUnder(e.getX(), e.getY()));
-                    //Log.d("position = " + position);
-                    mPresenter.onInterceptTouchEvent(position);
-                }
-                isMoveEvent = false;
-            } else if(e.getAction() == MotionEvent.ACTION_MOVE) {
-                isMoveEvent = true;
-            }
-            return super.onInterceptTouchEvent(rv, e);
+        public void onClickItem(View itemView) {
+            int position = mRecyclerView.getChildAdapterPosition(itemView);
+            ProgramData programData = mRecyclerViewAdapter.getSearchList().get(position);
+            mPresenter.onClickItem(itemView.getContext(), programData);
         }
     };
     RecyclerViewAdapter mRecyclerViewAdapter;
@@ -176,21 +171,33 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void showSetDialog(final int position) {
-        ProgramData data = mRecyclerViewAdapter.getSearchList().get(position);
-
+    public void showSetDialog(ProgramData programData, String[] choiceItems, int checkedItem) {
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
-        ab.setTitle("알림 설정");
-        ab.setMessage(data.getScheduleName() + ", "+data.getProgramMasterId() + ", " + data.getSubtitle()+ ", "+data.getChannelName()
-        + ", " + data.getRuntime());
-        ab.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+        //ab.setTitle(programData.getScheduleName());
+
+//        TextView customTitleView = new TextView(this);
+//        customTitleView.setText(programData.getScheduleName()+"\n"+getResources().getString(R.string.noti_dialog_title));
+//        customTitleView.setPadding(0, 10, 0, 0);
+//        customTitleView.setGravity(Gravity.CENTER);
+//        customTitleView.setTextSize(20);
+//        customTitleView.setTextColor(Color.BLACK);
+        View customTitleView = getLayoutInflater().inflate(R.layout.dialog_set_title, null);
+        TextView titleTv = ((TextView) customTitleView.findViewById(R.id.tv_title));
+        titleTv.setText(programData.getScheduleName());
+        ab.setCustomTitle(customTitleView);
+        ab.setSingleChoiceItems(choiceItems, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //mRecyclerViewAdapter.getProgramData(position);
 
             }
         });
-        ab.setNegativeButton("취소", null);
+        ab.setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        ab.setNegativeButton(R.string.text_cancel, null);
         ab.show();
     }
 
