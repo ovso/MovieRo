@@ -191,7 +191,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         public MyViewHolder(View itemView) {
             super(itemView);
             channelTv = (TextView) itemView.findViewById(R.id.tv_channel_name);
-            thumbnailIv = (ImageView) itemView.findViewById(R.id.iv_thumbnail);
+            thumbnailIv = (ImageView) itemView.findViewById(R.id.iv_notification);
             titleTv = (TextView) itemView.findViewById(R.id.tv_title);
             descriptionTv = (TextView) itemView.findViewById(R.id.tv_description);
             itemView.findViewById(R.id.recyclerview_assist_item).setOnClickListener(onRecyclerViewAdapterClickListener(itemView));
