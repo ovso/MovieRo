@@ -72,8 +72,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.d("beginDate = " + beginDate);
-        Log.d("today = " + today);
+        //Log.d("beginDate = " + beginDate);
+        //Log.d("today = " + today);
         int beginDateInt = Integer.parseInt(beginDate);
         int todayInt = Integer.parseInt(today);
 

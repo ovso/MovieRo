@@ -48,4 +48,14 @@ public class MainPresenterImpl implements MainPresenter {
             mView.showSortDialog(mModel.getSortChoiceItems(v.getContext()), -1);
         }
     }
+
+    @Override
+    public void onChoiceNoti(int which) {
+        mModel.setChoiceNoti(which);
+    }
+
+    @Override
+    public void onChoiceNotiOK(Context context, ProgramData programData) {
+        mModel.setNotifications(context, programData);
+    }
 }

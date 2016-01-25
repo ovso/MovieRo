@@ -17,6 +17,8 @@ public interface MainPresenter {
     void onQueryTextChange(String newText);
     void onClickItem(Context context, ProgramData programData);
     void onClick(android.view.View v);
+    void onChoiceNoti(int which);
+    void onChoiceNotiOK(Context context, ProgramData programData);
     interface View {
         void onInit();
         void initRecyclerView(List<ProgramData> list);

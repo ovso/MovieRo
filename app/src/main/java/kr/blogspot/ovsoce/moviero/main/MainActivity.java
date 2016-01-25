@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -168,22 +166,23 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void showSetDialog(ProgramData programData, String[] choiceItems, int checkedItem) {
+    public void showSetDialog(final ProgramData programData, String[] choiceItems, int checkedItem) {
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         View customTitleView = getLayoutInflater().inflate(R.layout.dialog_set_title, null);
-        TextView titleTv = ((TextView) customTitleView.findViewById(R.id.tv_title));
-        titleTv.setText(programData.getScheduleName());
+        ((TextView) customTitleView.findViewById(R.id.tv_title)).setText(programData.getScheduleName());
         ab.setCustomTitle(customTitleView);
+
+        String choiceItem;
         ab.setSingleChoiceItems(choiceItems, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                mPresenter.onChoiceNoti(which);
             }
         });
         ab.setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
             }
         });
         ab.setNegativeButton(R.string.text_cancel, null);
