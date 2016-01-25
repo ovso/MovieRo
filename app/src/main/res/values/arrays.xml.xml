@@ -6,12 +6,9 @@
         <item>10분 전</item>
         <item>30분 전</item>
     </string-array>
-    <string-array name="days">
-        <item>어제</item>
-        <item>오늘</item>
-        <item>내일</item>
-        <item>모레</item>
-        <item>글피</item>
-        <item>그글피</item>
+    <string-array name="sort_single_choice_items">
+        <item>일시 순</item>
+        <item>이름 순</item>
+        <item>채널 순</item>
     </string-array>
 </resources>

@@ -2,10 +2,9 @@ package kr.blogspot.ovsoce.moviero.main;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,11 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -29,7 +28,7 @@ import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View, Filter.FilterListener{
+        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View, Filter.FilterListener, View.OnClickListener{
 
     MainPresenter mPresenter;
     @Override
@@ -71,10 +70,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
             //Common.loadJSONFromAsset(getApplicationContext());
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -95,6 +90,8 @@ public class MainActivity extends AppCompatActivity
         mSearchView = (MaterialSearchView) findViewById(R.id.search_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        findViewById(R.id.btn_float).setOnClickListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -173,14 +170,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void showSetDialog(ProgramData programData, String[] choiceItems, int checkedItem) {
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
-        //ab.setTitle(programData.getScheduleName());
-
-//        TextView customTitleView = new TextView(this);
-//        customTitleView.setText(programData.getScheduleName()+"\n"+getResources().getString(R.string.noti_dialog_title));
-//        customTitleView.setPadding(0, 10, 0, 0);
-//        customTitleView.setGravity(Gravity.CENTER);
-//        customTitleView.setTextSize(20);
-//        customTitleView.setTextColor(Color.BLACK);
         View customTitleView = getLayoutInflater().inflate(R.layout.dialog_set_title, null);
         TextView titleTv = ((TextView) customTitleView.findViewById(R.id.tv_title));
         titleTv.setText(programData.getScheduleName());
@@ -201,9 +190,35 @@ public class MainActivity extends AppCompatActivity
         ab.show();
     }
 
+    @Override
+    public void showSortDialog(String[] choiceItems, int checkedItem) {
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        View customTitleView = getLayoutInflater().inflate(R.layout.dialog_sort_title, null);
+        //((TextView) customTitleView.findViewById(R.id.tv_title)).setText(getResources().getString(R.string.title_sort_dilaog));
+        ab.setCustomTitle(customTitleView);
+        ab.setSingleChoiceItems(choiceItems, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        ab.setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        ab.setNegativeButton(R.string.text_cancel, null);
+        ab.show();
+    }
 
     @Override
     public void onFilterComplete(int count) {
         //Log.d("count="+count);
+    }
+
+    @Override
+    public void onClick(View v) {
+        mPresenter.onClick(v);
     }
 }

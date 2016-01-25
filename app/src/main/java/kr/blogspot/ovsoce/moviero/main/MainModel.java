@@ -107,6 +107,9 @@ public class MainModel {
     public String[] getChoiceItems(Context context) {
         return context.getResources().getStringArray(R.array.single_choice_items);
     }
+    public String[] getSortChoiceItems(Context context) {
+        return context.getResources().getStringArray(R.array.sort_single_choice_items);
+    }
     public MovieData getMovieData(Context context) {
         String[] jsonMovieData = {
                 Common.loadJSONFromAsset(context, "moviero01.json"),

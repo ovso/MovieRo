@@ -1,10 +1,10 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.content.Context;
-import android.widget.Filterable;
 
 import java.util.List;
 
+import kr.blogspot.ovsoce.moviero.R;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.MovieData;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
@@ -39,5 +39,13 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onClickItem(Context context, ProgramData programData) {
         mView.showSetDialog(programData, mModel.getChoiceItems(context), -1);
+    }
+
+    @Override
+    public void onClick(android.view.View v) {
+        int id = v.getId();
+        if(id == R.id.btn_float) {
+            mView.showSortDialog(mModel.getSortChoiceItems(v.getContext()), -1);
+        }
     }
 }
