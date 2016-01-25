@@ -2,6 +2,7 @@ package kr.blogspot.ovsoce.moviero.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,12 +49,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         MyViewHolder myViewHolder = (MyViewHolder)holder;
         myViewHolder.titleTv.setText(name);
         myViewHolder.descriptionTv.setText(getDescription(data));
+        myViewHolder.channelTv.setText(data.getChannelName());
     }
     private String getDescription(ProgramData data) {
         StringBuilder descSb = new StringBuilder();
-        descSb.append("오늘");
-        descSb.append(" | ");
-        descSb.append(data.getChannelName());
+        descSb.append(getDay(data));
         descSb.append(" | ");
         descSb.append(data.getBeginTime()+"~"+data.getEndTime());
         descSb.append(" | ");
@@ -62,6 +63,63 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
 
         return descSb.toString();
     };
+    private String getDay(ProgramData data) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+        String today = sdf.format(new Date());
+        String beginDate = null;
+        try {
+            beginDate = sdf.format(sdf.parse(data.getBeginDate().replaceAll("-", "")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.d("beginDate = " + beginDate);
+        Log.d("today = " + today);
+        int beginDateInt = Integer.parseInt(beginDate);
+        int todayInt = Integer.parseInt(today);
+
+        String rtnDay;
+        if(todayInt > beginDateInt) {
+            int tempDay = (todayInt - beginDateInt);
+            switch (tempDay) {
+                case 1:
+                    rtnDay = "어제";
+                    break;
+                case 2:
+                    rtnDay = "그저께";
+                    break;
+                case 3:
+                    rtnDay = "그끄저께";
+                    break;
+                default:
+                    rtnDay = tempDay+"일 전";
+                    break;
+            }
+
+        } else if(todayInt == beginDateInt) {
+            rtnDay = "오늘";
+        } else {
+            rtnDay = "";
+            int tempDay = Math.abs(todayInt - beginDateInt);
+            switch (tempDay) {
+                case 1:
+                    rtnDay = "내일";
+                    break;
+                case 2:
+                    rtnDay = "모레";
+                    break;
+                case 3:
+                    rtnDay = "글피";
+                    break;
+                case 4:
+                    rtnDay = "그글피";
+                    break;
+                default:
+                    rtnDay = tempDay+"일 후";
+                    break;
+            }
+        }
+        return rtnDay;
+    }
 /*
     private String stringDate(String date) {
         String movieDate =
@@ -125,12 +183,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
+        TextView channelTv;
         TextView titleTv;
         TextView descriptionTv;
         ImageView thumbnailIv;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            channelTv = (TextView) itemView.findViewById(R.id.tv_channel_name);
             thumbnailIv = (ImageView) itemView.findViewById(R.id.iv_thumbnail);
             titleTv = (TextView) itemView.findViewById(R.id.tv_title);
             descriptionTv = (TextView) itemView.findViewById(R.id.tv_description);

@@ -77,6 +77,8 @@ public class MainModel {
                 Common.loadJSONFromAsset(context, "moviero04.json"),
                 Common.loadJSONFromAsset(context, "moviero05.json"),
                 Common.loadJSONFromAsset(context, "moviero06.json"),
+                Common.loadJSONFromAsset(context, "moviero07.json"),
+                Common.loadJSONFromAsset(context, "moviero08.json"),
         };
         //List<ChannelItem> list = new ArrayList<>();
         List<ProgramItem> programList = new ArrayList<>();
@@ -113,6 +115,8 @@ public class MainModel {
                 Common.loadJSONFromAsset(context, "moviero04.json"),
                 Common.loadJSONFromAsset(context, "moviero05.json"),
                 Common.loadJSONFromAsset(context, "moviero06.json"),
+                Common.loadJSONFromAsset(context, "moviero07.json"),
+                Common.loadJSONFromAsset(context, "moviero08.json"),
         };
 
         MovieDataImpl movieData = new MovieDataImpl();
