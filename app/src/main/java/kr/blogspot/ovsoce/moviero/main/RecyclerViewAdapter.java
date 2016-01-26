@@ -2,7 +2,6 @@ package kr.blogspot.ovsoce.moviero.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,22 +18,21 @@ import java.util.List;
 import java.util.Locale;
 
 import kr.blogspot.ovsoce.moviero.R;
-import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filterable{
     public List<ProgramData> getSearchList() {
         return mSearchList;
     }
-    List<ProgramData> mList;
-    List<ProgramData> mSearchList;
-    public RecyclerViewAdapter(List<ProgramData> list) {
+    ArrayList<ProgramData> mList;
+    ArrayList<ProgramData> mSearchList;
+    public RecyclerViewAdapter(ArrayList<ProgramData> list) {
         mList = list;
-        mSearchList = (List<ProgramData>) ((ArrayList<ProgramData>)list).clone();
+        mSearchList = (ArrayList<ProgramData>) mList.clone();
     }
-    private OnRecyclerViewItemClickListener mOnItemClickListener;
-    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-        mOnItemClickListener = listener;
+    private View.OnClickListener onItemClickListener;
+    public void setOnClickListener(View.OnClickListener listener) {
+        onItemClickListener = listener;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -50,6 +48,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         myViewHolder.titleTv.setText(name);
         myViewHolder.descriptionTv.setText(getDescription(data));
         myViewHolder.channelTv.setText(data.getChannelName());
+        myViewHolder.assistV.setTag(position);
+        myViewHolder.notificationsIv.setTag(position);
     }
     private String getDescription(ProgramData data) {
         StringBuilder descSb = new StringBuilder();
@@ -71,6 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
             beginDate = sdf.format(sdf.parse(data.getBeginDate().replaceAll("-", "")));
         } catch (ParseException e) {
             e.printStackTrace();
+            beginDate = "";
         }
         //Log.d("beginDate = " + beginDate);
         //Log.d("today = " + today);
@@ -98,7 +99,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         } else if(todayInt == beginDateInt) {
             rtnDay = "오늘";
         } else {
-            rtnDay = "";
             int tempDay = Math.abs(todayInt - beginDateInt);
             switch (tempDay) {
                 case 1:
@@ -152,7 +152,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
                     filterResults.values = tempArrayList;
                     filterResults.count = tempArrayList.size();
                 } else {
-                    mSearchList = (List<ProgramData>) ((ArrayList<ProgramData>)mList).clone();
+                    mSearchList = (ArrayList<ProgramData>) mList.clone();
                 }
                 return filterResults;
             }
@@ -162,22 +162,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
                 //Log.d("result.values=" + results.values);
                 //Log.d("result.count=" + results.count);
                 if (results.values != null) {
-                    mSearchList = (List<ProgramData>) results.values;
+                    mSearchList = (ArrayList<ProgramData>) results.values;
                     notifyDataSetChanged();
                 } else {
-                    mSearchList = (List<ProgramData>) ((ArrayList<ProgramData>)mList).clone();
+                    mSearchList = (ArrayList<ProgramData>) mList.clone();
                     notifyDataSetChanged();
                 }
-            }
-        };
-
-    }
-
-    private OnRecyclerViewAdapterClickListener onRecyclerViewAdapterClickListener(final View itemView) {
-        return new OnRecyclerViewAdapterClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOnItemClickListener.onClickItem(itemView);
             }
         };
     }
@@ -186,23 +176,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         TextView channelTv;
         TextView titleTv;
         TextView descriptionTv;
-        ImageView thumbnailIv;
+        ImageView notificationsIv;
+        View assistV;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             channelTv = (TextView) itemView.findViewById(R.id.tv_channel_name);
-            thumbnailIv = (ImageView) itemView.findViewById(R.id.iv_notification);
+            notificationsIv = (ImageView) itemView.findViewById(R.id.iv_notification);
             titleTv = (TextView) itemView.findViewById(R.id.tv_title);
             descriptionTv = (TextView) itemView.findViewById(R.id.tv_description);
-            itemView.findViewById(R.id.recyclerview_assist_item).setOnClickListener(onRecyclerViewAdapterClickListener(itemView));
+            assistV = itemView.findViewById(R.id.recyclerview_assist_item);
+            assistV.setOnClickListener(onItemClickListener);
+            notificationsIv.setOnClickListener(onItemClickListener);
         }
     }
 
-    public interface OnRecyclerViewAdapterClickListener extends android.view.View.OnClickListener{//, android.view.View.OnLongClickListener
-
-    }
-    public interface OnRecyclerViewItemClickListener{
-        void onClickItem(View view);
-        //void onLongClickItem(int position);
-    }
 }

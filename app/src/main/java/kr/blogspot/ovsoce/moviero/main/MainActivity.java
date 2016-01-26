@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity
     };
 
     @Override
-    public void initRecyclerView(List<ProgramData> list) {
+    public void initRecyclerView(ArrayList<ProgramData> list) {
         Log.d("list.size = " + list.size());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -141,15 +142,21 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerViewAdapter = new RecyclerViewAdapter(list);
-        mRecyclerViewAdapter.setOnItemClickListener(onRecyclerViewItemClickListener);
+        mRecyclerViewAdapter.setOnClickListener(onRecyclerViewItemClickListener);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
     }
-    private RecyclerViewAdapter.OnRecyclerViewItemClickListener onRecyclerViewItemClickListener = new RecyclerViewAdapter.OnRecyclerViewItemClickListener() {
+    private View.OnClickListener onRecyclerViewItemClickListener = new View.OnClickListener() {
         @Override
-        public void onClickItem(View itemView) {
-            int position = mRecyclerView.getChildAdapterPosition(itemView);
-            ProgramData programData = mRecyclerViewAdapter.getSearchList().get(position);
-            mPresenter.onClickItem(itemView.getContext(), programData);
+        public void onClick(View v) {
+            int id = v.getId();
+            int position = (int) v.getTag();
+            if(id == R.id.recyclerview_assist_item) {
+                ProgramData programData = mRecyclerViewAdapter.getSearchList().get(position);
+                mPresenter.onRecyclerViewItemClick(getApplicationContext(), programData);
+            } else if(id == R.id.iv_notification) {
+
+            }
+            Log.d("position = " + position);
         }
     };
     RecyclerViewAdapter mRecyclerViewAdapter;

@@ -36,8 +36,8 @@ public class MainModel {
         filterable.getFilter().filter(newText);
         searchList = ((RecyclerViewAdapter)filterable).getSearchList();
     }
-    public List<ProgramData> getProgramList(MovieData movieData) {
-        List<ProgramData> programDataList = new ArrayList<>();
+    public ArrayList<ProgramData> getProgramList(MovieData movieData) {
+        ArrayList<ProgramData> programDataList = new ArrayList<>();
 
         int size = movieData.getMovieDataByDateList().size();
         //Log.d("date length = " + size + "일");
@@ -104,8 +104,8 @@ public class MainModel {
         return programList;
         //return list;
     }
-    public String[] getChoiceItems(Context context) {
-        return context.getResources().getStringArray(R.array.single_choice_items);
+    public String[] getChoiceTime(Context context) {
+        return context.getResources().getStringArray(R.array.time_single_choice_items);
     }
     public String[] getSortChoiceItems(Context context) {
         return context.getResources().getStringArray(R.array.sort_single_choice_items);

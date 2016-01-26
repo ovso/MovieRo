@@ -2,6 +2,7 @@ package kr.blogspot.ovsoce.moviero.main;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
@@ -22,7 +23,7 @@ public class MainPresenterImpl implements MainPresenter {
         //List<ProgramItem> list = mModel.getProgramList(context);
         MovieData movieData = mModel.getMovieData(context);
 
-        List<ProgramData> list = mModel.getProgramList(movieData);
+        ArrayList<ProgramData> list = mModel.getProgramList(movieData);
         mView.initRecyclerView(list);
         String[] names = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
@@ -37,8 +38,8 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onClickItem(Context context, ProgramData programData) {
-        mView.showSetDialog(programData, mModel.getChoiceItems(context), -1);
+    public void onRecyclerViewItemClick(Context context, ProgramData programData) {
+        mView.showSetDialog(programData, mModel.getChoiceTime(context), -1);
     }
 
     @Override
