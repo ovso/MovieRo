@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
 import kr.blogspot.ovsoce.moviero.common.Log;
@@ -108,12 +107,12 @@ public class MainActivity extends AppCompatActivity
     private MaterialSearchView.SearchViewListener mSearchViewListener = new MaterialSearchView.SearchViewListener() {
         @Override
         public void onSearchViewShown() {
-            Log.d("");
+            //Log.d("");
         }
 
         @Override
         public void onSearchViewClosed() {
-            Log.d("");
+            //Log.d("");
         }
     };
     private MaterialSearchView.OnQueryTextListener mOnQueryTextListener = new MaterialSearchView.OnQueryTextListener() {
@@ -148,14 +147,9 @@ public class MainActivity extends AppCompatActivity
     private View.OnClickListener onRecyclerViewItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            int id = v.getId();
             int position = (int) v.getTag();
-            if(id == R.id.recyclerview_assist_item) {
-                ProgramData programData = mRecyclerViewAdapter.getSearchList().get(position);
-                mPresenter.onRecyclerViewItemClick(getApplicationContext(), programData);
-            } else if(id == R.id.iv_notification) {
-
-            }
+            ProgramData programData = mRecyclerViewAdapter.getSearchList().get(position);
+            mPresenter.onRecyclerViewItem(v, programData);
             Log.d("position = " + position);
         }
     };
@@ -179,7 +173,6 @@ public class MainActivity extends AppCompatActivity
         ((TextView) customTitleView.findViewById(R.id.tv_title)).setText(programData.getScheduleName());
         ab.setCustomTitle(customTitleView);
 
-        String choiceItem;
         ab.setSingleChoiceItems(choiceItems, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -216,6 +209,11 @@ public class MainActivity extends AppCompatActivity
         });
         ab.setNegativeButton(R.string.text_cancel, null);
         ab.show();
+    }
+
+    @Override
+    public void navigateToSearch(String name) {
+        Log.d("name = " + name);
     }
 
     @Override

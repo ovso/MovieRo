@@ -198,9 +198,8 @@ public class MainModel {
     public void setChoiceNoti(int which) {
         notiWhich = which;
     }
-    List<ProgramData> notificationsList = new ArrayList<>();
+    ArrayList<ProgramData> notificationsList = new ArrayList<>();
     public boolean setNotifications(Context context, ProgramData programData) {
-        String[] times = context.getResources().getStringArray(R.array.time_single_choice_items);
         return notificationsList.add(programData);
     }
 }

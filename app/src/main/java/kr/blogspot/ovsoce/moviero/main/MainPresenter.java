@@ -16,10 +16,10 @@ import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramItem;
 public interface MainPresenter {
     void onCreate(Context context);
     void onQueryTextChange(String newText);
-    void onRecyclerViewItemClick(Context context, ProgramData programData);
     void onClick(android.view.View v);
     void onChoiceNoti(int which);
     void onChoiceNotiOK(Context context, ProgramData programData);
+    void onRecyclerViewItem(android.view.View view, ProgramData programData);
     interface View {
         void onInit();
         void initRecyclerView(ArrayList<ProgramData> list);
@@ -27,5 +27,6 @@ public interface MainPresenter {
         void startFilter(CharSequence newText);
         void showSetDialog(ProgramData programData, String[] choiceItems, int checkedItem);
         void showSortDialog(String[] choiceItems, int checkedItem);
+        void navigateToSearch(String name);
     }
 }

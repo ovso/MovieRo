@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.content.Context;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +39,6 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onRecyclerViewItemClick(Context context, ProgramData programData) {
-        mView.showSetDialog(programData, mModel.getChoiceTime(context), -1);
-    }
-
-    @Override
     public void onClick(android.view.View v) {
         int id = v.getId();
         if(id == R.id.btn_float) {
@@ -59,4 +55,19 @@ public class MainPresenterImpl implements MainPresenter {
     public void onChoiceNotiOK(Context context, ProgramData programData) {
         mModel.setNotifications(context, programData);
     }
+
+    @Override
+    public void onRecyclerViewItem(android.view.View view, ProgramData programData) {
+/*
+        int id = view.getId();
+        if(id == R.id.iv_notification) {
+            mView.showSetDialog(programData, mModel.getChoiceTime(view.getContext()), -1);
+        } else if( id == R.id.recyclerview_assist_item) {
+            mView.navigateToSearch(programData.getScheduleName());
+        }
+*/
+        mView.showSetDialog(programData, mModel.getChoiceTime(view.getContext()), -1);
+
+    }
+
 }
