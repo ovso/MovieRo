@@ -163,7 +163,11 @@ public class MainModel {
     }
     public boolean setNotifications(Context context, ProgramData programData) {
         MyApplication app = (MyApplication) context.getApplicationContext();
-        String time = context.getResources().getStringArray(R.array.time_single_choice_items_value)[choiceNotifications];
-        return app.getDatabaseHelper().insertNotificationsData(programData, time);
+        if(choiceNotifications != -1) {
+            return app.getDatabaseHelper().insertNotificationsData(programData, String.valueOf(choiceNotifications));
+        } else {
+            return app.getDatabaseHelper().deleteNotificationsData(programData);
+        }
+
     }
 }

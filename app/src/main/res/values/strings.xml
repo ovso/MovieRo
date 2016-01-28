@@ -7,6 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="text_ok">확인</string>
     <string name="text_cancel">취소</string>
+    <string name="text_notifications_off">알림 OFF</string>
     <string name="title_sort_dilaog">정렬</string>
 
     <string name="url_movie_search"><![CDATA["https://m.search.naver.com/search.naver?sm=mtb_hty.top&where=m&query="]]></string>

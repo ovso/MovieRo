@@ -53,7 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_SUBTITLE="subtitle";
     private static final String KEY_SIGN_LANGUAGE="signLanguage";
     private static final String KEY_CHANNEL_NAME="channelName";
-    private static final String KEY_NOTIFICATIONS_TIME="notificationsTime";
+    private static final String KEY_NOTIFICATIONS_VALUE="notificationsValue";
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_NOTIFICATIONS_TABLE = "CREATE TABLE " + TABLE_NOTIFICATIONS + "("
@@ -77,7 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_SUBTITLE + " TEXT,"
                 + KEY_SIGN_LANGUAGE + " TEXT,"
                 + KEY_CHANNEL_NAME + " TEXT,"
-                + KEY_NOTIFICATIONS_TIME + " TEXT"
+                + KEY_NOTIFICATIONS_VALUE + " TEXT"
                 + ")";
         db.execSQL(CREATE_NOTIFICATIONS_TABLE);
     }
@@ -90,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
-    public boolean insertNotificationsData(ProgramData data, String minute) {
+    public boolean insertNotificationsData(ProgramData data, String choice) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
 
@@ -115,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_SUBTITLE, data.getSubtitle());
             values.put(KEY_SIGN_LANGUAGE, data.getSignLanguage());
             values.put(KEY_CHANNEL_NAME, data.getChannelName());
-            values.put(KEY_NOTIFICATIONS_TIME, minute);
+            values.put(KEY_NOTIFICATIONS_VALUE, choice);
 
             // Inserting Row
             db.insert(TABLE_NOTIFICATIONS, null, values);
@@ -127,11 +127,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
-    public void deleteNotificationsData(ProgramData data) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NOTIFICATIONS, KEY_SCHEDULE_ID + " = ?",
-                new String[] { data.getScheduleId() });
-        db.close();
+    public boolean deleteNotificationsData(ProgramData data) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.delete(TABLE_NOTIFICATIONS, KEY_SCHEDULE_ID + " = ?", new String[] { data.getScheduleId() });
+            db.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public ArrayList<ProgramData> getNotificationsList() {

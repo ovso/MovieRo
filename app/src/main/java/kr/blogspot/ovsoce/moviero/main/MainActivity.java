@@ -166,11 +166,19 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mPresenter.onChoiceNoti(which);
+                Log.d("choice = " + which);
             }
         });
         ab.setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
+            }
+        });
+        ab.setNeutralButton(R.string.text_notifications_off, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mPresenter.onChoiceNoti(-1);
                 mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
             }
         });
