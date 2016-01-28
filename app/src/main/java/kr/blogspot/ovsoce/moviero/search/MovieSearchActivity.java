@@ -10,9 +10,6 @@ import android.webkit.WebViewClient;
 
 import kr.blogspot.ovsoce.moviero.R;
 
-/**
- * Created by ovso on 2016. 1. 28..
- */
 public class MovieSearchActivity extends AppCompatActivity {
 
     @Override
@@ -30,7 +27,7 @@ public class MovieSearchActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
 
-        webView.loadUrl("https://m.search.daum.net/search?w=tot&nil_mtopsearch=btn&DA=YZR&q="+getIntent().getStringExtra("name"));
+        webView.loadUrl("https://m.search.naver.com/search.naver?sm=mtb_hty.top&where=m&query=" + getIntent().getStringExtra("name"));
     }
 
     @Override
