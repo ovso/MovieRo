@@ -58,7 +58,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         descSb.append(data.getBeginTime()+"~"+data.getEndTime());
         descSb.append(" | ");
         descSb.append(data.getRuntime()+"분");
-        descSb.append(" | ");
 
         return descSb.toString();
     };
