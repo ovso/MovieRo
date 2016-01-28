@@ -52,7 +52,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_content_sort"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@drawable/shape_float_circle">
     </ImageButton>
 

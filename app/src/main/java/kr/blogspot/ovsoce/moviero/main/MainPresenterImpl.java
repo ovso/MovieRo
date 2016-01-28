@@ -53,21 +53,24 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onChoiceNotiOK(Context context, ProgramData programData) {
-        mModel.setNotifications(context, programData);
+        if(mModel.setNotifications(context, programData)) {
+            mView.navigateToNotiListActivity();
+        }
     }
 
     @Override
     public void onRecyclerViewItem(android.view.View view, ProgramData programData) {
-/*
-        int id = view.getId();
-        if(id == R.id.iv_notification) {
-            mView.showSetDialog(programData, mModel.getChoiceTime(view.getContext()), -1);
-        } else if( id == R.id.recyclerview_assist_item) {
-            mView.navigateToSearch(programData.getScheduleName());
-        }
-*/
+
         mView.showSetDialog(programData, mModel.getChoiceTime(view.getContext()), -1);
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(int id) {
+        if (id == R.id.nav_camera) {
+            return true;
+        } else {
+            return mView.navigateToNotiListActivity();
+        }
+    }
 }

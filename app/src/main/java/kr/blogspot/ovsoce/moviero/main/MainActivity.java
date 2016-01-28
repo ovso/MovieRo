@@ -64,27 +64,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-            //Common.loadJSONFromAsset(getApplicationContext());
-            return true;
-        } else if (id == R.id.nav_manage) {
-            Intent intent = new Intent("kr.blogspot.ovsoce.moviero.notilist");
-            startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-        return false;
+        return mPresenter.onNavigationItemSelected(item.getItemId());
     }
 
 
@@ -222,6 +205,16 @@ public class MainActivity extends AppCompatActivity
         Log.d("name = " + name);
     }
 
+    @Override
+    public boolean navigateToNotiListActivity() {
+        Intent intent = new Intent("kr.blogspot.ovsoce.moviero.notilist");
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        return false;
+    }
+
+    /*
+     */
     @Override
     public void onFilterComplete(int count) {
         //Log.d("count="+count);
