@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -175,13 +176,15 @@ public class MainActivity extends AppCompatActivity
                 mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
             }
         });
-        ab.setNeutralButton(R.string.text_notifications_off, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mPresenter.onChoiceNoti(-1);
-                mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
-            }
-        });
+        if( checkedItem != -1 ) {
+            ab.setNeutralButton(R.string.text_notifications_off, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mPresenter.onChoiceNoti(-1);
+                    mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
+                }
+            });
+        }
         ab.setNegativeButton(R.string.text_cancel, null);
         ab.show();
     }
@@ -227,6 +230,16 @@ public class MainActivity extends AppCompatActivity
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("name", movieName);
         startActivity(intent);
+    }
+
+    @Override
+    public void onNotifications(String scheduleId) {
+        for (int i = 0; i < mRecyclerViewAdapter.getItemCount(); i++) {
+            if(mRecyclerViewAdapter.getSearchList().get(i).getScheduleId().equals(scheduleId)) {
+                ((ImageView)mRecyclerView.getChildAt(i).findViewById(R.id.iv_notification)).setImageResource(R.drawable.ic_social_notifications_none);
+            }
+            //mRecyclerView.notifyAll();
+        }
     }
 
     /*

@@ -54,7 +54,8 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onChoiceNotiOK(Context context, ProgramData programData) {
         if(mModel.setNotifications(context, programData)) {
-            mView.navigateToNotiListActivity();
+            //mView.navigateToNotiListActivity();
+            mView.onNotifications(programData.getScheduleId());
         }
     }
 
