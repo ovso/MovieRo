@@ -186,7 +186,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
             titleTv = (TextView) itemView.findViewById(R.id.tv_title);
             descriptionTv = (TextView) itemView.findViewById(R.id.tv_description);
             assistV = itemView.findViewById(R.id.recyclerview_assist_item);
-            assistV.setOnClickListener(onItemClickListener);
+            assistV.setOnClickListener(onItemClickListener != null?onItemClickListener:null);
             ///notificationsIv.setOnClickListener(onItemClickListener);
         }
     }

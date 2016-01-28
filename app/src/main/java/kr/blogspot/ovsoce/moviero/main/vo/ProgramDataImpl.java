@@ -26,6 +26,10 @@ public class ProgramDataImpl implements ProgramData {
     private String subtitle;
     private String signLanguage;
     private String channelName;
+    private String notificationsTime;
+
+    public ProgramDataImpl() {
+    }
 
     @Override
     public String getScheduleId() {
@@ -196,5 +200,14 @@ public class ProgramDataImpl implements ProgramData {
 
     public void setChannelName(String channelName) {
         this.channelName = channelName;
+    }
+
+    @Override
+    public String getNotificationsTime() {
+        return notificationsTime;
+    }
+
+    public void setNotificationsTime(String notificationsTime) {
+        this.notificationsTime = notificationsTime;
     }
 }

@@ -17,9 +17,7 @@ import java.util.ArrayList;
 
 import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.ProgramDataImpl;
-import kr.blogspot.ovsoce.moviero.main.vo.ProgramNotiDataImpl;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
-import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramNotiData;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -136,8 +134,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<ProgramNotiData> getNotificationsList() {
-        ArrayList<ProgramNotiData> list = new ArrayList<>();
+    public ArrayList<ProgramData> getNotificationsList() {
+        ArrayList<ProgramData> list = new ArrayList<>();
         // Select All Query
 
         try {
@@ -148,7 +146,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // looping through all rows and adding to list
             if (cursor.moveToFirst()) {
                 do {
-                    ProgramNotiDataImpl contact = new ProgramNotiDataImpl();
+                    ProgramDataImpl contact = new ProgramDataImpl();
 
                     contact.setScheduleId(cursor.getString(1));
                     contact.setProgramMasterId(cursor.getString(2));

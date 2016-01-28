@@ -27,11 +27,20 @@
                     app:popupTheme="@style/AppTheme.PopupOverlay" />android:background="?attr/colorPrimary"
             </FrameLayout>
         </android.support.design.widget.AppBarLayout>
-        <TextView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="목록..."/>
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_noti"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
 
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
