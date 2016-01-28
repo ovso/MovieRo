@@ -47,19 +47,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         MyViewHolder myViewHolder = (MyViewHolder)holder;
         myViewHolder.titleTv.setText(name);
         myViewHolder.descriptionTv.setText(getDescription(data));
-        myViewHolder.channelTv.setText(data.getChannelName());
+        myViewHolder.channelTv.setText(getDay(data));
         myViewHolder.assistV.setTag(position);
         myViewHolder.notificationsIv.setTag(position);
     }
     private String getDescription(ProgramData data) {
         StringBuilder descSb = new StringBuilder();
-        descSb.append(getDay(data));
+        descSb.append(data.getChannelName());
         descSb.append(" | ");
         descSb.append(data.getBeginTime()+"~"+data.getEndTime());
         descSb.append(" | ");
         descSb.append(data.getRuntime()+"분");
         descSb.append(" | ");
-        descSb.append(data.getAgeRating().equals("0")?"전체":data.getAgeRating()+"세");
 
         return descSb.toString();
     };

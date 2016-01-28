@@ -23,5 +23,6 @@ public interface MainPresenter {
         void showSortDialog(String[] choiceItems, int checkedItem);
         void navigateToSearch(String name);
         boolean navigateToNotiListActivity();
+        void navigateToMovieSearchActivity(String movieName);
     }
 }

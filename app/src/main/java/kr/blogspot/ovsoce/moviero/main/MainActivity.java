@@ -213,6 +213,14 @@ public class MainActivity extends AppCompatActivity
         return false;
     }
 
+    @Override
+    public void navigateToMovieSearchActivity(String movieName) {
+        Intent intent = new Intent("kr.blogspot.ovsoce.moviero.moviesearch");
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("name", movieName);
+        startActivity(intent);
+    }
+
     /*
      */
     @Override

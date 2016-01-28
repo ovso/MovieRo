@@ -41,7 +41,8 @@
                 android:text="영화 제목"
                 android:gravity="center_horizontal|bottom"
                 android:textSize="17sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:singleLine="true"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -52,13 +53,14 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="top|center_horizontal"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:singleLine="true"/>
         </LinearLayout>
         <ImageView
             android:id="@+id/iv_notification"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="1"
             android:src="@drawable/ic_social_notifications_none_off" />
     </LinearLayout>
 <!--
