@@ -26,5 +26,6 @@ public interface MainPresenter {
         void navigateToMovieSearchActivity(String movieName);
         void showProgress();
         void hideProgress();
+        void updateRecyclerView(ProgramData data);
     }
 }

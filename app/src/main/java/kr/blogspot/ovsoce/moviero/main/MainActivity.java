@@ -242,6 +242,25 @@ public class MainActivity extends AppCompatActivity
         mProgress.hide();
     }
 
+    @Override
+    public void updateRecyclerView(ProgramData data) {
+        RecyclerViewAdapter adapter = (RecyclerViewAdapter) mRecyclerView.getAdapter();
+        ArrayList<ProgramData> searchList = adapter.getSearchList();
+        ArrayList<ProgramData> originList = adapter.getList();
+
+        for (int i = 0; i < searchList.size(); i++) {
+            if(searchList.get(i).getScheduleId().equals(data.getScheduleId())) {
+                searchList.set(i, data);
+            }
+        }
+        for (int i = 0; i < originList.size(); i++) {
+            if(originList.get(i).getScheduleId().equals(data.getScheduleId())) {
+                originList.set(i, data);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
     /*
      */
     @Override

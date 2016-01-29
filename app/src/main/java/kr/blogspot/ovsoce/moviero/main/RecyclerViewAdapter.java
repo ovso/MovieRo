@@ -22,7 +22,7 @@ import kr.blogspot.ovsoce.moviero.app.MyApplication;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filterable{
-    public List<ProgramData> getSearchList() {
+    public ArrayList<ProgramData> getSearchList() {
         return mSearchList;
     }
     ArrayList<ProgramData> mList;
@@ -34,6 +34,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
     private View.OnClickListener onItemClickListener;
     public void setOnClickListener(View.OnClickListener listener) {
         onItemClickListener = listener;
+    }
+    public ArrayList<ProgramData> getList() {
+        return mList;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -52,6 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         myViewHolder.assistV.setTag(R.string.tag_key_position, position);
         myViewHolder.notificationsIv.setTag(R.string.tag_key_position, position);
         myViewHolder.notificationsIv.setTag(R.string.tag_key_schedule_id, data.getScheduleId());
+        myViewHolder.notificationsIv.setImageResource(data.getNotificationsValue().equals("-1")?R.drawable.ic_social_notifications_none_off:R.drawable.ic_social_notifications_none);
     }
     private String getDescription(ProgramData data) {
         StringBuilder descSb = new StringBuilder();

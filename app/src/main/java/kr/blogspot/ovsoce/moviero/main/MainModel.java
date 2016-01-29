@@ -27,14 +27,7 @@ import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
  * Created by ovso on 2016. 1. 20..
  */
 public class MainModel {
-    private List<ProgramData> searchList;
-    public ProgramData getProgramData(int position) {
-        return searchList.get(position);
-    }
-    public void onQueryTextChange(String newText, Filterable filterable) {
-        filterable.getFilter().filter(newText);
-        searchList = ((RecyclerViewAdapter)filterable).getSearchList();
-    }
+
     public ArrayList<ProgramData> getProgramList(MovieData movieData) {
         ArrayList<ProgramData> programDataList = new ArrayList<>();
 
@@ -162,12 +155,10 @@ public class MainModel {
     }
     public boolean setNotifications(Context context, ProgramData programData) {
         MyApplication app = (MyApplication) context.getApplicationContext();
-        if(choiceNotifications != -1) {
-            return app.getDatabaseHelper().insertProgramData(programData);
-        } else {
-            //return app.getDatabaseHelper().deleteProgaramData();
-            return false;
-        }
+        return app.getDatabaseHelper().updateNotificationsValue(programData.getScheduleId(), String.valueOf(choiceNotifications));
 
+    }
+    public ProgramData getProgramData(Context context, String scheduleId) {
+        return ((MyApplication)context.getApplicationContext()).getDatabaseHelper().getProgramData(scheduleId);
     }
 }

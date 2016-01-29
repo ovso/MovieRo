@@ -64,14 +64,6 @@ public class MainPresenterImpl implements MainPresenter {
                 mView.hideProgress();
             }
         }.execute();
-        //mView.initRecyclerView(list);
-/*
-        String[] names = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            names[i] = list.get(i).getScheduleName();
-        }
-        mView.setSuggestion(names);
-*/
     }
 
     @Override
@@ -94,9 +86,10 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onChoiceNotiOK(Context context, ProgramData programData) {
-        if(mModel.setNotifications(context, programData)) {
-            mView.navigateToNotiListActivity();
-        }
+        mModel.setNotifications(context, programData);
+        ProgramData data = mModel.getProgramData(context, programData.getScheduleId());
+        mView.updateRecyclerView(data);
+        //mView.navigateToNotiListActivity();
     }
 
     @Override

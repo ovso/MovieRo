@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.ProgramDataImpl;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
@@ -118,10 +119,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+    public boolean updateNotificationsValue(String scheduleId, String value) {
+        Log.d("value = " + value);
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(KEY_NOTIFICATIONS_VALUE, value);
+            // Inserting Row
+            db.update(TABLE_PROGRAM_SCHEDULE, contentValues, KEY_SCHEDULE_ID + "=?", new String[]{scheduleId});
+            db.close(); // Closing database connection
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public boolean deleteProgaramData(ProgramData data) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_PROGRAM_SCHEDULE, KEY_SCHEDULE_ID + " = ?", new String[] { data.getScheduleId() });
+            db.delete(TABLE_PROGRAM_SCHEDULE, KEY_ID + " = ?", new String[]{data.getScheduleId()});
             db.close();
             return true;
         } catch (Exception e) {
@@ -129,7 +145,71 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+    public ProgramData getProgramData(String scheduleId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_PROGRAM_SCHEDULE,
+                new String[]{
+                        KEY_ID,
+                        KEY_SCHEDULE_ID,
+                        KEY_PROGRAM_MASTER_ID,
+                        KEY_SCHEDULE_NAME,
+                        KEY_BEGIN_DATE,
+                        KEY_BEGIN_TIME,
+                        KEY_END_TIME,
+                        KEY_RUNTIME,
+                        KEY_LARGE_GENRE_ID,
+                        KEY_EPISODE_NO,
+                        KEY_LIVE,
+                        KEY_REBROADCAST,
+                        KEY_HD,
+                        KEY_AUDIO,
+                        KEY_SCREEN_EXPLAIN,
+                        KEY_CAPTION,
+                        KEY_AGE_RATING,
+                        KEY_SUBTITLE,
+                        KEY_SIGN_LANGUAGE,
+                        KEY_CHANNEL_NAME,
+                        KEY_NOTIFICATIONS_VALUE},
+                KEY_SCHEDULE_ID + "=?",
+                new String[]{scheduleId},
+                null, null, null, null);
 
+        ProgramDataImpl data = new ProgramDataImpl();
+
+        //cursor.moveToNext();
+
+        //Log.d("cursor.getString(0) = " + cursor.getString(0));
+
+        if(cursor.moveToNext()) {
+            Log.d("cursor.getString(0) = " + cursor.getString(0));
+            data.setScheduleId(cursor.getString(1));
+            data.setProgramMasterId(cursor.getString(2));
+            data.setScheduleName(cursor.getString(3));
+            data.setBeginDate(cursor.getString(4));
+            data.setBeginTime(cursor.getString(5));
+            data.setEndTime(cursor.getString(6));
+            data.setRuntime(cursor.getString(7));
+            data.setLargeGenreId(cursor.getString(8));
+            data.setEpisodeNo(cursor.getString(9));
+            data.setLive(cursor.getString(10));
+            data.setRebroadcast(cursor.getString(11));
+            data.setHd(cursor.getString(12));
+            data.setAudio(cursor.getString(13));
+            data.setScreenExplain(cursor.getString(14));
+            data.setCaption(cursor.getString(15));
+            data.setAgeRating(cursor.getString(16));
+            data.setSubtitle(cursor.getString(17));
+            data.setSignLanguage(cursor.getString(18));
+            data.setChannelName(cursor.getString(19));
+            data.setNotificationsValue(cursor.getString(20));
+        }
+
+        cursor.close();
+        db.close();
+
+        return data;
+    }
     public ArrayList<ProgramData> getProgramDataList() {
         ArrayList<ProgramData> list = new ArrayList<>();
         // Select All Query
@@ -181,6 +261,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public ArrayList<ProgramData> getNotificationsList() {
         ArrayList<ProgramData> list = new ArrayList<>();
+
         // Select All Query
 
         try {
@@ -189,8 +270,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);
             // looping through all rows and adding to list
+            int a = 0;
+            Log.d("out");
             if (cursor.moveToFirst()) {
+                Log.d("in");
                 do {
+                    if( a < 5) {
+                        Log.d("첫번째 value = " + cursor.getString(20));
+
+                    }
+                    a++;
                     if(!cursor.getString(20).equals("-1")) {
                         ProgramDataImpl contact = new ProgramDataImpl();
                         contact.setScheduleId(cursor.getString(1));
