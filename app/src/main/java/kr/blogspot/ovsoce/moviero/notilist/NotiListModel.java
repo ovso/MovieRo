@@ -16,4 +16,9 @@ public class NotiListModel {
         MyApplication app = (MyApplication)context.getApplicationContext();
         return app.getDatabaseHelper().getNotificationsList();
     }
+
+    public boolean removeItem(Context context, String scheduleId) {
+        MyApplication app = (MyApplication)context.getApplicationContext();
+        return app.getDatabaseHelper().updateNotificationsValue(scheduleId, "-1");
+    }
 }

@@ -65,7 +65,7 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_noti);
         mRecyclerView.setLayoutManager(layoutManager);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
-        //mRecyclerViewAdapter.setOnClickListener(onRecyclerViewItemClickListener);
+        adapter.setOnClickListener(onRecyclerViewItemClickListener);
         mRecyclerView.setAdapter(adapter);
     }
 
