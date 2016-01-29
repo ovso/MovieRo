@@ -93,7 +93,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onRecyclerViewItem(android.view.View view, ProgramData programData) {
+    public void onRecyclerViewItemClick(android.view.View view, ProgramData programData) {
         int id = view.getId();
         if(id == R.id.ibtn_notifications) {
             //int checkItem = view.getTag();

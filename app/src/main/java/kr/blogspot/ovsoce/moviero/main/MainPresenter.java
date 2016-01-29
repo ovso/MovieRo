@@ -12,7 +12,7 @@ public interface MainPresenter {
     void onClick(android.view.View v);
     void onChoiceNoti(int which);
     void onChoiceNotiOK(Context context, ProgramData programData);
-    void onRecyclerViewItem(android.view.View view, ProgramData programData);
+    void onRecyclerViewItemClick(android.view.View view, ProgramData programData);
     boolean onNavigationItemSelected(int id);
     interface View {
         void onInit();

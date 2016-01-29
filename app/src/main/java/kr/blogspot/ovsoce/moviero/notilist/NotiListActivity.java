@@ -43,7 +43,6 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
     }
 
     private RecyclerView mRecyclerView;
-    private RecyclerViewAdapter mRecyclerViewAdapter;
     @Override
     public void onRecyclerView(ArrayList<ProgramData> list) {
         for (int i = 0; i < list.size(); i++) {
@@ -55,20 +54,19 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_noti);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerViewAdapter = new RecyclerViewAdapter(list);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
         //mRecyclerViewAdapter.setOnClickListener(onRecyclerViewItemClickListener);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        mRecyclerView.setAdapter(adapter);
     }
 
     private View.OnClickListener onRecyclerViewItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            int position = (int) v.getTag();
-/*
-            ProgramData programData = mRecyclerViewAdapter.getSearchList().get(position);
-            mPresenter.onRecyclerViewItem(v, programData);
+            int position = (int) v.getTag(R.string.tag_key_position);
+            ProgramData programData = ((RecyclerViewAdapter)mRecyclerView.getAdapter()).getSearchList().get(position);
+            mPresenter.onRecyclerViewItemClick(v, programData);
             Log.d("position = " + position);
-*/
         }
     };
+
 }

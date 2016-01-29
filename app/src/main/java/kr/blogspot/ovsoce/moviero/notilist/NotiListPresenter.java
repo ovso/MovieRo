@@ -11,6 +11,7 @@ import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
  */
 public interface NotiListPresenter {
     void onCreate(Context context);
+    void onRecyclerViewItemClick(android.view.View view, ProgramData programData);
     interface View {
         void onInit();
         void onRecyclerView(ArrayList<ProgramData> list);

@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -131,20 +130,20 @@ public class MainActivity extends AppCompatActivity
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerViewAdapter = new RecyclerViewAdapter(list);
-        mRecyclerViewAdapter.setOnClickListener(onRecyclerViewItemClickListener);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
+        adapter.setOnClickListener(onRecyclerViewItemClickListener);
+        mRecyclerView.setAdapter(adapter);
     }
     private View.OnClickListener onRecyclerViewItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             int position = (int) v.getTag(R.string.tag_key_position);
-            ProgramData programData = mRecyclerViewAdapter.getSearchList().get(position);
-            mPresenter.onRecyclerViewItem(v, programData);
+            ProgramData programData = ((RecyclerViewAdapter)mRecyclerView.getAdapter()).getSearchList().get(position);
+            mPresenter.onRecyclerViewItemClick(v, programData);
             Log.d("position = " + position);
         }
     };
-    RecyclerViewAdapter mRecyclerViewAdapter;
+    //RecyclerViewAdapter mRecyclerViewAdapter;
     @Override
     public void setSuggestion(String[] names) {
         //mSearchView.setSuggestions(names);
@@ -152,8 +151,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void startFilter(CharSequence s) {
-        if (mRecyclerViewAdapter != null) {
-            mRecyclerViewAdapter.getFilter().filter(s, MainActivity.this);
+        if (mRecyclerView.getAdapter() != null) {
+            ((RecyclerViewAdapter)mRecyclerView.getAdapter()).getFilter().filter(s, MainActivity.this);
         }
     }
 
