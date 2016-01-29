@@ -96,11 +96,11 @@ public class MainPresenterImpl implements MainPresenter {
     public void onRecyclerViewItem(android.view.View view, ProgramData programData) {
         int id = view.getId();
         if(id == R.id.ibtn_notifications) {
-            mView.showSetDialog(programData, mModel.getChoiceTime(view.getContext()), -1);
+            int checkItem = Integer.parseInt(programData.getNotificationsValue());
+            mView.showSetDialog(programData, mModel.getChoiceTime(view.getContext()), checkItem);
         } else {
             mView.navigateToMovieSearchActivity(programData.getScheduleName());
         }
-
     }
 
     @Override
