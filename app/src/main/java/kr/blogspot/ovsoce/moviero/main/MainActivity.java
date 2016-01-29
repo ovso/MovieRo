@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -229,17 +228,7 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra("name", movieName);
         startActivity(intent);
     }
-
-    @Override
-    public void onNotifications(String scheduleId) {
-        for (int i = 0; i < mRecyclerViewAdapter.getItemCount(); i++) {
-            if(mRecyclerViewAdapter.getSearchList().get(i).getScheduleId().equals(scheduleId)) {
-                //((ImageView)mRecyclerView.getChildAt(i).findViewById(R.id.iv_notification)).setImageResource(R.drawable.ic_social_notifications_none);
-            }
-            //mRecyclerView.notifyAll();
-        }
-    }
-
+    
     /*
      */
     @Override

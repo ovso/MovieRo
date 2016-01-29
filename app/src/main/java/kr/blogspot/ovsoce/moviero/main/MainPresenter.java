@@ -24,6 +24,5 @@ public interface MainPresenter {
         void navigateToSearch(String name);
         boolean navigateToNotiListActivity();
         void navigateToMovieSearchActivity(String movieName);
-        void onNotifications(String scheduleId);
     }
 }
