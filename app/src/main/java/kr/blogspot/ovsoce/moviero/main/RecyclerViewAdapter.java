@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 
 import kr.blogspot.ovsoce.moviero.R;
+import kr.blogspot.ovsoce.moviero.app.MyApplication;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filterable{
@@ -48,8 +49,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         myViewHolder.titleTv.setText(name);
         myViewHolder.descriptionTv.setText(getDescription(data));
         myViewHolder.channelTv.setText(getDay(data));
-        myViewHolder.assistV.setTag(position);
-        myViewHolder.notificationsIv.setTag(position);
+        myViewHolder.assistV.setTag(R.string.tag_key_position, position);
+        myViewHolder.notificationsIv.setTag(R.string.tag_key_position, position);
+        myViewHolder.notificationsIv.setTag(R.string.tag_key_schedule_id, data.getScheduleId());
     }
     private String getDescription(ProgramData data) {
         StringBuilder descSb = new StringBuilder();

@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity
     private View.OnClickListener onRecyclerViewItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            int position = (int) v.getTag();
+            int position = (int) v.getTag(R.string.tag_key_position);
             ProgramData programData = mRecyclerViewAdapter.getSearchList().get(position);
             mPresenter.onRecyclerViewItem(v, programData);
             Log.d("position = " + position);
@@ -176,15 +176,13 @@ public class MainActivity extends AppCompatActivity
                 mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
             }
         });
-        if( checkedItem != -1 ) {
-            ab.setNeutralButton(R.string.text_notifications_off, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mPresenter.onChoiceNoti(-1);
-                    mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
-                }
-            });
-        }
+        ab.setNeutralButton(R.string.text_notifications_off, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mPresenter.onChoiceNoti(-1);
+                mPresenter.onChoiceNotiOK(getApplicationContext(), programData);
+            }
+        });
         ab.setNegativeButton(R.string.text_cancel, null);
         ab.show();
     }
@@ -236,7 +234,7 @@ public class MainActivity extends AppCompatActivity
     public void onNotifications(String scheduleId) {
         for (int i = 0; i < mRecyclerViewAdapter.getItemCount(); i++) {
             if(mRecyclerViewAdapter.getSearchList().get(i).getScheduleId().equals(scheduleId)) {
-                ((ImageView)mRecyclerView.getChildAt(i).findViewById(R.id.iv_notification)).setImageResource(R.drawable.ic_social_notifications_none);
+                //((ImageView)mRecyclerView.getChildAt(i).findViewById(R.id.iv_notification)).setImageResource(R.drawable.ic_social_notifications_none);
             }
             //mRecyclerView.notifyAll();
         }
