@@ -1,12 +1,19 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.moviero.R;
+import kr.blogspot.ovsoce.moviero.app.MyApplication;
+import kr.blogspot.ovsoce.moviero.common.Log;
+import kr.blogspot.ovsoce.moviero.db.DatabaseHelper;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.MovieData;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
@@ -21,16 +28,50 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onCreate(Context context) {
         mView.onInit();
+
         //List<ProgramItem> list = mModel.getProgramList(context);
         MovieData movieData = mModel.getMovieData(context);
 
-        ArrayList<ProgramData> list = mModel.getProgramList(movieData);
-        mView.initRecyclerView(list);
+        final ArrayList<ProgramData> list = mModel.getProgramList(movieData);
+        // DB 등록.
+        final DatabaseHelper helper = ((MyApplication) context.getApplicationContext()).getDatabaseHelper();
+        //Log.d("before data list = " + helper.get);
+        ArrayList<ProgramData> list2;
+        new AsyncTask<Void, Void, ArrayList<ProgramData>>() {
+
+            @Override
+            protected void onPreExecute() {
+                //super.onPreExecute();
+                mView.showProgress();
+            }
+
+            @Override
+            protected ArrayList<ProgramData> doInBackground(Void... params) {
+//                Log.d("list.size = " + list.size());
+                if(helper.queryNumEntries() < 1) {
+                    for (int i = 0; i < list.size(); i++) {
+                        helper.insertProgramData(list.get(i));
+                    }
+                }
+
+                return helper.getProgramDataList();
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<ProgramData> datas) {
+                //super.onPostExecute(aVoid);
+                mView.initRecyclerView(datas);
+                mView.hideProgress();
+            }
+        }.execute();
+        //mView.initRecyclerView(list);
+/*
         String[] names = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             names[i] = list.get(i).getScheduleName();
         }
         mView.setSuggestion(names);
+*/
     }
 
     @Override

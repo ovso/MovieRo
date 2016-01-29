@@ -47,7 +47,7 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
     @Override
     public void onRecyclerView(ArrayList<ProgramData> list) {
         for (int i = 0; i < list.size(); i++) {
-            Log.d(list.get(i).getScheduleName()+", " + list.get(i).getNotificationsTime());
+            Log.d(list.get(i).getScheduleName()+", " + list.get(i).getNotificationsValue());
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

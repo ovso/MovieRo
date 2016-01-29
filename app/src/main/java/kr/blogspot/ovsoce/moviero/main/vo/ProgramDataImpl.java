@@ -26,7 +26,7 @@ public class ProgramDataImpl implements ProgramData {
     private String subtitle;
     private String signLanguage;
     private String channelName;
-    private String notificationsTime;
+    private String notificationsValue;
 
     public ProgramDataImpl() {
     }
@@ -203,11 +203,11 @@ public class ProgramDataImpl implements ProgramData {
     }
 
     @Override
-    public String getNotificationsTime() {
-        return notificationsTime;
+    public String getNotificationsValue() {
+        return notificationsValue;
     }
 
-    public void setNotificationsTime(String notificationsTime) {
-        this.notificationsTime = notificationsTime;
+    public void setNotificationsValue(String notificationsValue) {
+        this.notificationsValue = notificationsValue;
     }
 }

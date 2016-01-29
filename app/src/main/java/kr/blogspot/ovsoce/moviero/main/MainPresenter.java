@@ -24,5 +24,7 @@ public interface MainPresenter {
         void navigateToSearch(String name);
         boolean navigateToNotiListActivity();
         void navigateToMovieSearchActivity(String movieName);
+        void showProgress();
+        void hideProgress();
     }
 }

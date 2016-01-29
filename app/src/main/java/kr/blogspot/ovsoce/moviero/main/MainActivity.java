@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -228,7 +230,18 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra("name", movieName);
         startActivity(intent);
     }
-    
+    private ProgressDialog mProgress;
+    @Override
+    public void showProgress() {
+        mProgress = ProgressDialog.show(this, null, "Wait..." );
+    }
+
+    @Override
+    public void hideProgress() {
+        mProgress.cancel();
+        mProgress.hide();
+    }
+
     /*
      */
     @Override

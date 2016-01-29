@@ -23,5 +23,5 @@ public interface ProgramData{
     String getSubtitle();
     String getSignLanguage();
     String getChannelName();
-    String getNotificationsTime();
+    String getNotificationsValue();
 }

@@ -64,7 +64,6 @@ public class MainModel {
 
         //Log.d("Total program count = " + count);
         Log.d("movie count = " + movieCount);
-
         return programDataList;
     }
     public String[] getChoiceTime(Context context) {
@@ -139,7 +138,7 @@ public class MainModel {
                         programData.setSubtitle(programJsonObject.getString("subtitle"));
                         programData.setSignLanguage(programJsonObject.getString("signLanguage"));
                         programData.setChannelName(jsonObject.getString("channelName"));
-
+                        programData.setNotificationsValue("-1"); // JSON 존재하지 않는 기본값
                         programDataList.add(programData);
                     }
 
@@ -164,9 +163,10 @@ public class MainModel {
     public boolean setNotifications(Context context, ProgramData programData) {
         MyApplication app = (MyApplication) context.getApplicationContext();
         if(choiceNotifications != -1) {
-            return app.getDatabaseHelper().insertNotificationsData(programData, String.valueOf(choiceNotifications));
+            return app.getDatabaseHelper().insertProgramData(programData);
         } else {
-            return app.getDatabaseHelper().deleteNotificationsData(programData);
+            //return app.getDatabaseHelper().deleteProgaramData();
+            return false;
         }
 
     }
