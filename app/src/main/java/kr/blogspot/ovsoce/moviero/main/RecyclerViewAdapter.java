@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,9 +54,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         myViewHolder.descriptionTv.setText(getDescription(data));
         myViewHolder.channelTv.setText(getDay(data));
         myViewHolder.assistV.setTag(R.string.tag_key_position, position);
-        myViewHolder.notificationsIv.setTag(R.string.tag_key_position, position);
-        myViewHolder.notificationsIv.setTag(R.string.tag_key_schedule_id, data.getScheduleId());
-        myViewHolder.notificationsIv.setImageResource(data.getNotificationsValue().equals("-1")?R.drawable.ic_social_notifications_none_off:R.drawable.ic_social_notifications_none);
+        myViewHolder.notificationsIBtn.setTag(R.string.tag_key_position, position);
+        myViewHolder.notificationsIBtn.setTag(R.string.tag_key_schedule_id, data.getScheduleId());
+        myViewHolder.notificationsIBtn.setImageResource(data.getNotificationsValue().equals("-1")?R.drawable.ic_social_notifications_none_off:R.drawable.ic_social_notifications_none);
     }
     private String getDescription(ProgramData data) {
         StringBuilder descSb = new StringBuilder();
@@ -180,18 +181,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         TextView channelTv;
         TextView titleTv;
         TextView descriptionTv;
-        ImageView notificationsIv;
+        ImageButton notificationsIBtn;
         View assistV;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             channelTv = (TextView) itemView.findViewById(R.id.tv_channel_name);
-            notificationsIv = (ImageView) itemView.findViewById(R.id.iv_notification);
+            notificationsIBtn = (ImageButton) itemView.findViewById(R.id.ibtn_notifications);
             titleTv = (TextView) itemView.findViewById(R.id.tv_title);
             descriptionTv = (TextView) itemView.findViewById(R.id.tv_description);
             assistV = itemView.findViewById(R.id.recyclerview_assist_item);
             assistV.setOnClickListener(onItemClickListener);
-            notificationsIv.setOnClickListener(onItemClickListener);
+            notificationsIBtn.setOnClickListener(onItemClickListener);
         }
     }
 }

@@ -56,15 +56,16 @@
                 android:textSize="15sp"
                 android:singleLine="true"/>
         </LinearLayout>
-        <ImageView
-            android:id="@+id/iv_notification"
+        <ImageButton
+            android:id="@+id/ibtn_notifications"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_social_notifications_none_off"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:focusable="true"/>
+            android:src="@drawable/ic_social_notifications_none_off"
+            android:focusable="true"
+            android:scaleType="center"/>
     </LinearLayout>
 <!--
     <TextView
