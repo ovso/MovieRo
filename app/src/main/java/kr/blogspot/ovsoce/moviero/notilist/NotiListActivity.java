@@ -35,6 +35,16 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
     }
 
     @Override
+    public void showSetDialog(ProgramData programData, String[] choiceItems, int checkedItem) {
+
+    }
+
+    @Override
+    public void showSortDialog(String[] choiceItems, int checkedItem) {
+
+    }
+
+    @Override
     public void onInit() {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -44,7 +54,7 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
 
     private RecyclerView mRecyclerView;
     @Override
-    public void onRecyclerView(ArrayList<ProgramData> list) {
+    public void initRecyclerView(ArrayList<ProgramData> list) {
         for (int i = 0; i < list.size(); i++) {
             Log.d(list.get(i).getScheduleName()+", " + list.get(i).getNotificationsValue());
         }
@@ -57,6 +67,26 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
         //mRecyclerViewAdapter.setOnClickListener(onRecyclerViewItemClickListener);
         mRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void navigateToMovieSearchActivity(String movieName) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void updateRecyclerView(ProgramData data) {
+
     }
 
     private View.OnClickListener onRecyclerViewItemClickListener = new View.OnClickListener() {

@@ -18,11 +18,22 @@ public class NotiListPresenterImpl implements NotiListPresenter {
     @Override
     public void onCreate(Context context) {
         mView.onInit();
-        mView.onRecyclerView(mModel.getList(context));
+        mView.initRecyclerView(mModel.getList(context));
     }
+
 
     @Override
     public void onRecyclerViewItemClick(android.view.View view, ProgramData programData) {
+
+    }
+
+    @Override
+    public void onChoiceNoti(int which) {
+
+    }
+
+    @Override
+    public void onChoiceNotiOK(Context context, ProgramData programData) {
 
     }
 }

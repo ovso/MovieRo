@@ -4,16 +4,17 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
+import kr.blogspot.ovsoce.moviero.main.DialogChoice;
+import kr.blogspot.ovsoce.moviero.main.OnRecyclerViewItemClick;
+import kr.blogspot.ovsoce.moviero.main.Presenter;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 /**
  * Created by ovso on 2016. 1. 28..
  */
-public interface NotiListPresenter {
+public interface NotiListPresenter extends OnRecyclerViewItemClick,DialogChoice {
     void onCreate(Context context);
-    void onRecyclerViewItemClick(android.view.View view, ProgramData programData);
-    interface View {
-        void onInit();
-        void onRecyclerView(ArrayList<ProgramData> list);
+    interface View extends Presenter.View {
+
     }
 }

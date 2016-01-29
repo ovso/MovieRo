@@ -143,11 +143,6 @@ public class MainActivity extends AppCompatActivity
             Log.d("position = " + position);
         }
     };
-    //RecyclerViewAdapter mRecyclerViewAdapter;
-    @Override
-    public void setSuggestion(String[] names) {
-        //mSearchView.setSuggestions(names);
-    }
 
     @Override
     public void startFilter(CharSequence s) {
@@ -209,11 +204,6 @@ public class MainActivity extends AppCompatActivity
         });
         ab.setNegativeButton(R.string.text_cancel, null);
         ab.show();
-    }
-
-    @Override
-    public void navigateToSearch(String name) {
-        Log.d("name = " + name);
     }
 
     @Override
