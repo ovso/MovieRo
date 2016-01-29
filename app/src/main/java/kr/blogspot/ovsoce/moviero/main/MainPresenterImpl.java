@@ -96,8 +96,8 @@ public class MainPresenterImpl implements MainPresenter {
     public void onRecyclerViewItem(android.view.View view, ProgramData programData) {
         int id = view.getId();
         if(id == R.id.ibtn_notifications) {
-            int checkItem = Integer.parseInt(programData.getNotificationsValue());
-            mView.showSetDialog(programData, mModel.getChoiceTime(view.getContext()), checkItem);
+            //int checkItem = view.getTag();
+            mView.showSetDialog(programData, mModel.getChoiceTime(view.getContext()), Integer.parseInt(programData.getNotificationsValue()));
         } else {
             mView.navigateToMovieSearchActivity(programData.getScheduleName());
         }

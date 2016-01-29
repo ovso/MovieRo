@@ -158,17 +158,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void showSetDialog(final ProgramData programData, String[] choiceItems, int checkedItem) {
+    public void showSetDialog(final ProgramData programData, String[] choiceItems, final int checkedItem) {
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         View customTitleView = getLayoutInflater().inflate(R.layout.dialog_set_title, null);
         ((TextView) customTitleView.findViewById(R.id.tv_title)).setText(programData.getScheduleName());
         ab.setCustomTitle(customTitleView);
 
+        mPresenter.onChoiceNoti(checkedItem);
+
         ab.setSingleChoiceItems(choiceItems, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mPresenter.onChoiceNoti(which);
-                Log.d("choice = " + which);
+                //Log.d("choice = " + which);
             }
         });
         ab.setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
