@@ -46,4 +46,13 @@ public class MovieSearchActivity extends AppCompatActivity implements MovieSearc
         String query = getIntent().getStringExtra("name");
         mWebView.loadUrl(url + query);
     }
+
+    @Override
+    public void onBackPressed() {
+        if(!mWebView.canGoBack()) {
+            super.onBackPressed();
+        } else {
+            mWebView.goBack();
+        }
+    }
 }

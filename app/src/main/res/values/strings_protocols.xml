@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="url_movie_search"><![CDATA["https://m.search.naver.com/search.naver?sm=mtb_hty.top&where=m&query="]]></string>
+
+    <string name="tag_key_schedule_id">schedule_id</string>
+    <string name="tag_key_position">position</string>
+
+    <string name="action_activity_movie_search">kr.blogspot.ovsoce.moviero.moviesearch</string>
+    <string name="extra_name_movie_name">name</string>
+</resources>

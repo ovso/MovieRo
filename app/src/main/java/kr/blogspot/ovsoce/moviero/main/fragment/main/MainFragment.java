@@ -134,11 +134,10 @@ public class MainFragment extends Fragment implements MainFragmentPresenter.View
 
     @Override
     public void navigateToMovieSearchActivity(String movieName) {
-        Intent intent = new Intent("kr.blogspot.ovsoce.moviero.moviesearch");
+        Intent intent = new Intent(getString(R.string.action_activity_movie_search));
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("name", movieName);
+        intent.putExtra(getString(R.string.extra_name_movie_name), movieName);
         startActivity(intent);
-
     }
     private ProgressDialog mProgress;
     @Override

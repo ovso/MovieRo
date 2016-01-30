@@ -6,11 +6,9 @@ public interface MainPresenter{
     void onCreate(Context context);
     void onClick(android.view.View v);
     boolean onNavigationItemSelected(int id);
-    interface View{
+
+    interface View extends Presenter.View{
         boolean navigateToNotiListActivity();
         void replaceFragment();
-        void showProgress();
-        void hideProgress();
-        void onInit();
     }
 }

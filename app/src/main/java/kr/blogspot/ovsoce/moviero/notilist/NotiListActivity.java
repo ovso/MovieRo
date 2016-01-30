@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.moviero.notilist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,16 +36,6 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
     }
 
     @Override
-    public void showSetDialog(ProgramData programData, String[] choiceItems, int checkedItem) {
-
-    }
-
-    @Override
-    public void showSortDialog(String[] choiceItems, int checkedItem) {
-
-    }
-
-    @Override
     public void onInit() {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,7 +62,10 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
 
     @Override
     public void navigateToMovieSearchActivity(String movieName) {
-
+        Intent intent = new Intent(getString(R.string.action_activity_movie_search));
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(getString(R.string.extra_name_movie_name), movieName);
+        startActivity(intent);
     }
 
     @Override
@@ -86,11 +80,6 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
 
     @Override
     public void updateRecyclerView(ProgramData data) {
-
-    }
-
-    @Override
-    public void startFilter(CharSequence newText) {
 
     }
 
