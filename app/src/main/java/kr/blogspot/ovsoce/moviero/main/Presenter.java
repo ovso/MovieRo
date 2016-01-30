@@ -20,4 +20,6 @@ public interface Presenter {
         void updateRecyclerView(ProgramData data);
         void startFilter(CharSequence newText);
     }
+
+
 }
