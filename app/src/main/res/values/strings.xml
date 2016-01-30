@@ -9,5 +9,6 @@
     <string name="text_cancel">취소</string>
     <string name="text_notifications_off">알림 OFF</string>
     <string name="title_sort_dilaog">정렬</string>
+    <string name="text_waiting">잠시만 기다려주세요</string>
 
 </resources>

@@ -142,7 +142,7 @@ public class MainFragment extends Fragment implements MainFragmentPresenter.View
     private ProgressDialog mProgress;
     @Override
     public void showProgress() {
-        mProgress = ProgressDialog.show(getActivity(), null, "Wait...");
+        mProgress = ProgressDialog.show(getActivity(), null, getString(R.string.text_waiting));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.moviero.notilist;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -68,14 +69,16 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
         startActivity(intent);
     }
 
+    private ProgressDialog mProgress;
     @Override
     public void showProgress() {
-
+        mProgress = ProgressDialog.show(NotiListActivity.this, null, getString(R.string.text_waiting));
     }
 
     @Override
     public void hideProgress() {
-
+        mProgress.cancel();
+        mProgress.hide();
     }
 
     @Override
