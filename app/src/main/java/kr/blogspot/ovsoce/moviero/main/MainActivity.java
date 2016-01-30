@@ -1,11 +1,13 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 
 import kr.blogspot.ovsoce.moviero.R;
 import kr.blogspot.ovsoce.moviero.common.Log;
+import kr.blogspot.ovsoce.moviero.main.fragment.main.MainFragment;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 public class MainActivity extends AppCompatActivity
@@ -212,6 +215,17 @@ public class MainActivity extends AppCompatActivity
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         return false;
+    }
+
+
+    private MainFragment mMainFragment;
+    @Override
+    public void replaceFragment() {
+        if( mMainFragment == null ) {
+            mMainFragment = new MainFragment();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, mMainFragment).commit();
     }
 
     @Override

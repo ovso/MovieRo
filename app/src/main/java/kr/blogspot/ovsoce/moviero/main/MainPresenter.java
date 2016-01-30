@@ -10,5 +10,6 @@ public interface MainPresenter extends OnRecyclerViewItemClick,DialogChoice {
     interface View extends Presenter.View {
         void startFilter(CharSequence newText);
         boolean navigateToNotiListActivity();
+        void replaceFragment();
     }
 }
