@@ -18,5 +18,6 @@ public interface Presenter {
         void showProgress();
         void hideProgress();
         void updateRecyclerView(ProgramData data);
+        void startFilter(CharSequence newText);
     }
 }

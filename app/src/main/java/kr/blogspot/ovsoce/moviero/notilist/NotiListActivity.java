@@ -89,6 +89,11 @@ public class NotiListActivity extends AppCompatActivity implements NotiListPrese
 
     }
 
+    @Override
+    public void startFilter(CharSequence newText) {
+
+    }
+
     private View.OnClickListener onRecyclerViewItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

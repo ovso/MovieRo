@@ -1,7 +1,6 @@
 package kr.blogspot.ovsoce.moviero.main;
 
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -94,8 +93,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_camera);
 
-        mSearchView.setOnQueryTextListener(mOnQueryTextListener);
-        mSearchView.setOnSearchViewListener(mSearchViewListener);
+        //mSearchView.setOnQueryTextListener(mOnQueryTextListener);
+        //mSearchView.setOnSearchViewListener(mSearchViewListener);
     }
     private MaterialSearchView.SearchViewListener mSearchViewListener = new MaterialSearchView.SearchViewListener() {
         @Override

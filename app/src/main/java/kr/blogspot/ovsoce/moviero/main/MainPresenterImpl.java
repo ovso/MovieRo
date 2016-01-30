@@ -21,8 +21,9 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onCreate(Context context) {
-        mView.onInit();
 
+        mView.onInit();
+/*
         MovieData movieData = mModel.getMovieData(context);
 
         final ArrayList<ProgramData> list = mModel.getProgramList(movieData);
@@ -54,7 +55,10 @@ public class MainPresenterImpl implements MainPresenter {
                 mView.initRecyclerView(datas);
                 mView.hideProgress();
             }
-        };//.execute();
+        };
+*/
+
+        //.execute();
 
         mView.replaceFragment();
     }
