@@ -10,19 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import kr.blogspot.ovsoce.moviero.R;
-import kr.blogspot.ovsoce.moviero.app.MyApplication;
-import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filterable{
