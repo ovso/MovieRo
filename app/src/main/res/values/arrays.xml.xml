@@ -10,4 +10,18 @@
         <item>이름 순</item>
         <item>채널 순</item>
     </string-array>
+    <string-array name="day_after">
+        <item>오늘</item>
+        <item>내일</item>
+        <item>모레</item>
+        <item>글피</item>
+        <item>그글피</item>
+        <item>일 후</item>
+    </string-array>
+    <string-array name="day_before">
+        <item>어제</item>
+        <item>그저께</item>
+        <item>그끄저께</item>
+        <item>일 전</item>
+    </string-array>
 </resources>

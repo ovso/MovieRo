@@ -2,8 +2,6 @@ package kr.blogspot.ovsoce.moviero.main.fragment.main;
 
 import android.content.Context;
 
-import java.util.ArrayList;
-
 import kr.blogspot.ovsoce.moviero.main.DialogChoice;
 import kr.blogspot.ovsoce.moviero.main.OnRecyclerViewItemClick;
 import kr.blogspot.ovsoce.moviero.main.Presenter;

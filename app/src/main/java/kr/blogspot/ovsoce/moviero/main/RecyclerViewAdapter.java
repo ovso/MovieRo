@@ -1,5 +1,7 @@
 package kr.blogspot.ovsoce.moviero.main;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import java.util.Locale;
 
 import kr.blogspot.ovsoce.moviero.R;
 import kr.blogspot.ovsoce.moviero.app.MyApplication;
+import kr.blogspot.ovsoce.moviero.common.Log;
 import kr.blogspot.ovsoce.moviero.main.vo.vointerface.ProgramData;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filterable{
@@ -39,9 +42,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
     public ArrayList<ProgramData> getList() {
         return mList;
     }
+    private Context mContext;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, null);
+        mContext = layoutView.getContext();
         return new MyViewHolder(layoutView);
     }
 
@@ -52,78 +57,64 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements Filtera
         MyViewHolder myViewHolder = (MyViewHolder)holder;
         myViewHolder.titleTv.setText(name);
         myViewHolder.descriptionTv.setText(getDescription(data));
-        myViewHolder.channelTv.setText(getDay(data));
+        myViewHolder.channelTv.setText(getDay(data.getBeginDate()));
         myViewHolder.assistV.setTag(R.string.tag_key_position, position);
         myViewHolder.notificationsIBtn.setTag(R.string.tag_key_position, position);
         myViewHolder.notificationsIBtn.setTag(R.string.tag_key_schedule_id, data.getScheduleId());
-        myViewHolder.notificationsIBtn.setImageResource(data.getNotificationsValue().equals("-1")?R.drawable.ic_social_notifications_none_off:R.drawable.ic_social_notifications_none);
+        myViewHolder.notificationsIBtn.setImageResource(data.getNotificationsValue().equals("-1") ? R.drawable.ic_social_notifications_none_off : R.drawable.ic_social_notifications_none);
     }
     private String getDescription(ProgramData data) {
         StringBuilder descSb = new StringBuilder();
         descSb.append(data.getChannelName());
         descSb.append(" | ");
-        descSb.append(data.getBeginTime()+"~"+data.getEndTime());
+        descSb.append(data.getBeginTime() + "~" + data.getEndTime());
         descSb.append(" | ");
-        descSb.append(data.getRuntime()+"분");
+        descSb.append(data.getRuntime() + "분");
 
         return descSb.toString();
     };
-    private String getDay(ProgramData data) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
-        String today = sdf.format(new Date());
-        String beginDate = null;
+    private String getToday() {
+        SimpleDateFormat fm1 = new SimpleDateFormat("yyyy-MM-dd");
+        String date = fm1.format(new Date());
+        return date;
+    }
+    public String getDay(String beginDateStr){
+        String start = getToday();
+        String end = beginDateStr;
+        String day = "";
         try {
-            beginDate = sdf.format(sdf.parse(data.getBeginDate().replaceAll("-", "")));
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = formatter.parse(start);
+            Date beginDate = formatter.parse(end);
+
+            // 시간차이를 시간,분,초를 곱한 값으로 나누면 하루 단위가 나옴
+            long diff = beginDate.getTime() - today.getTime();
+            long diffDays = diff / (24 * 60 * 60 * 1000);
+
+            //System.out.println("날짜차이=" + diffDays);
+
+            Resources res = mContext.getResources();
+            int index = (int) diffDays;
+            if(diffDays >= 0) {
+                if(diffDays < 5) {
+                    day = res.getStringArray(R.array.day_after)[index];
+                } else {
+                    day = diffDays + res.getStringArray(R.array.day_after)[5];
+                }
+            } else {
+                if(diffDays > -4) {
+                    day = res.getStringArray(R.array.day_before)[Math.abs(index)-1];
+                } else {
+                    day = Math.abs(diffDays) + res.getStringArray(R.array.day_before)[3];
+                }
+
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
-            beginDate = "";
         }
-        //Log.d("beginDate = " + beginDate);
-        //Log.d("today = " + today);
-        int beginDateInt = Integer.parseInt(beginDate);
-        int todayInt = Integer.parseInt(today);
 
-        String rtnDay;
-        if(todayInt > beginDateInt) {
-            int tempDay = (todayInt - beginDateInt);
-            switch (tempDay) {
-                case 1:
-                    rtnDay = "어제";
-                    break;
-                case 2:
-                    rtnDay = "그저께";
-                    break;
-                case 3:
-                    rtnDay = "그끄저께";
-                    break;
-                default:
-                    rtnDay = tempDay+"일 전";
-                    break;
-            }
-
-        } else if(todayInt == beginDateInt) {
-            rtnDay = "오늘";
-        } else {
-            int tempDay = Math.abs(todayInt - beginDateInt);
-            switch (tempDay) {
-                case 1:
-                    rtnDay = "내일";
-                    break;
-                case 2:
-                    rtnDay = "모레";
-                    break;
-                case 3:
-                    rtnDay = "글피";
-                    break;
-                case 4:
-                    rtnDay = "그글피";
-                    break;
-                default:
-                    rtnDay = tempDay+"일 후";
-                    break;
-            }
-        }
-        return rtnDay;
+        return day;
     }
 /*
     private String stringDate(String date) {
