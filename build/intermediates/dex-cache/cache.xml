@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/ovso/Documents/workspace/MovieRo/jericho-html-3.4/jericho-html-3.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="71c6a6d10d66c381d6567996d2abed04674d49ca">
+        <dex dex="/Users/ovso/Documents/workspace/MovieRo/app/build/intermediates/pre-dexed/debug/jericho-html-3.4_fe851c23b0bf9cdbf13c3edb83261af107cc9c04.jar" />
+    </item>
+
+</items>

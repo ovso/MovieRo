@@ -1,1 +1,1 @@
-include ':app', ':searchview'
+include ':app', ':searchview', ':jericho-html-3.4'

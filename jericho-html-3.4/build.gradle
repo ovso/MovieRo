@@ -1,0 +1,2 @@
+configurations.create("default")
+artifacts.add("default", file('jericho-html-3.4.jar'))
